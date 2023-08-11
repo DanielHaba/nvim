@@ -1,5 +1,5 @@
 local options = {
-    colorscheme = "rose_pine",
+    colorscheme = "catppuccin_latte",
     enable_installer = true,
 
     remaps = {
@@ -16,7 +16,6 @@ local color = require("themer.utils.colors")
 local plugins = options.remaps.highlights.globals.plugins
 
 palette.bg.alt2 = color.blend(palette.bg.base, palette.bg.selected, 0.8)
-
 
 local cmp = {
     CmpItemKindKeyword = "keyword",
@@ -53,9 +52,13 @@ local cmp = {
 plugins.cmp = {}
 
 for group, item in pairs(cmp) do
+    local item_color = palette.syntax[item] or palette.fg
+    if item_color == "#0" then
+        item_color = "#000000"
+    end
     plugins.cmp[group] = {
-        bg = palette.syntax[item],
-        fg = color.blend(palette.syntax[item], palette.bg.base, 0.3),
+        bg = item_color,
+        fg = color.blend(item_color, palette.bg.base, 0.3),
     }
 end
 

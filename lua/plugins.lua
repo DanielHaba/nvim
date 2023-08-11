@@ -1,5 +1,9 @@
 return {
     {
+        "catppuccin/nvim",
+        name = "catppuccin"
+    },
+    {
         "nvim-tree/nvim-web-devicons",
         opts = {},
     },
@@ -340,5 +344,6 @@ return {
     },
 
 
+    { "Hoffs/omnisharp-extended-lsp.nvim" },
     { "b0o/schemastore.nvim" },
 }
