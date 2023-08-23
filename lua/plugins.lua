@@ -1,9 +1,5 @@
 return {
     {
-        "catppuccin/nvim",
-        name = "catppuccin"
-    },
-    {
         "nvim-tree/nvim-web-devicons",
         opts = {},
     },
@@ -341,6 +337,23 @@ return {
         config = function()
             require("illuminate").configure()
         end,
+    },
+    {
+        "folke/trouble.nvim",
+        cmd = {
+            "Trouble",
+            "TroubleClose",
+            "TroubleToggle",
+            "TroubleRefresh",
+        },
+        dependencies = {
+            "nvim-tree/nvim-web-devicons",
+            "neovim/nvim-lspconfig",
+        },
+        init = function ()
+            require("config.keymaps").setup("trouble")
+        end,
+        opts = {},
     },
 
     {
