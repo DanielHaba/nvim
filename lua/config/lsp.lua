@@ -95,3 +95,11 @@ for _, server in ipairs({ "html", "cssls", "tsserver", "clangd" }) do
         capabilities = capabilities,
     })
 end
+
+require("rust-tools").setup({
+    server = {
+        on_attach = on_attach,
+        capabilities = capabilities,
+    },
+})
+require("rust-tools").inlay_hints.enable()

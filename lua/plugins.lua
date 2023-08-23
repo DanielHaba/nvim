@@ -343,7 +343,41 @@ return {
         end,
     },
 
+    {
+        "folke/trouble.nvim",
+        dependencies = {
+            "nvim-tree/nvim-web-devicons",
+            "neovim/nvim-lspconfig",
+        },
+        cmd = {
+            "Trouble",
+            "TroubleClose",
+            "TroubleToggle",
+            "TroubleRefresh",
+        },
+        init = function ()
+            require("config.keymaps").setup("trouble")
+        end,
+        opts = {
+            use_diagnostic_signs = true,
+            mode = "document_diagnostics",
+        },
+    },
+
+    {
+        "folke/noice.nvim",
+        event = "VeryLazy",
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+            "rcarriga/nvim-notify",
+        },
+        opts = function()
+            return require("config.noice")
+        end,
+    },
+
 
     { "Hoffs/omnisharp-extended-lsp.nvim" },
+    { "simrat39/rust-tools.nvim" },
     { "b0o/schemastore.nvim" },
 }

@@ -81,6 +81,15 @@ mappings.telescope = {
     },
 }
 
+mappings.trouble = {
+    {
+        desc = "Trouble toggle",
+        mode = "n",
+        opts = { silent = true },
+        "<Leader>tt",
+        ":TroubleToggle<CR>",
+    },
+}
 
 local M = {}
 
