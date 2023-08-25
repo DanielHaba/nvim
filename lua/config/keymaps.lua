@@ -1,5 +1,43 @@
 local mappings = {}
 
+mappings.common = {
+    {
+        desc = "Exit insert mode",
+        mode = "t",
+        opts = { silent = true },
+        "<ESC>",
+        "<C-\\><C-n>",
+    },
+    {
+        desc = "Switch window",
+        mode = "t",
+        opts = { silent = true, remap = false },
+        "<C-w>w",
+        "<C-\\><C-n><C-w>w",
+    },
+    {
+        desc = "Open terminal",
+        mode = "n",
+        opts = { silent = true, remap = false },
+        "<C-Enter>",
+        "<CMD>belowright<CR><CMD>split<CR><CMD>terminal<CR>i",
+    },
+    {
+        desc = "Scroll down",
+        mode = "n",
+        opts = { silent = true, remap = false },
+        "<C-d>",
+        "<CMD>set so=999<CR><C-d><CMD>set so=0<CR>",
+    },
+    {
+        desc = "Scroll up",
+        mode = "n",
+        opts = { silent = true, remap = false },
+        "<C-u>",
+        "<CMD>set so=999<CR><C-u><CMD>set so=0<CR>",
+    },
+}
+
 mappings.lsp = {
     {
         desc = "Go to declaration",
@@ -32,6 +70,12 @@ mappings.lsp = {
         function() vim.lsp.buf.rename() end,
     },
     {
+        desc = "Documentation",
+        mode = "n",
+        "K",
+        function() vim.lsp.buf.hover() end,
+    },
+    {
         desc = "Reformat",
         mode = "n",
         "<Leader>rf",
@@ -47,13 +91,13 @@ mappings.lsp = {
         desc = "Next diagnostics",
         mode = "n",
         "]d",
-        function() vim.lsp.buf.diagnostics.goto_next() end,
+        function() vim.diagnostic.goto_next() end,
     },
     {
         desc = "Previous diagnostics",
         mode = "n",
         "[d",
-        function() vim.lsp.buf.diagnostics.goto_prev() end,
+        function() vim.diagnostic.goto_prev() end,
     },
 }
 
@@ -91,6 +135,27 @@ mappings.trouble = {
     },
 }
 
+mappings.noice = {
+    {
+        desc = "Redirect output",
+        mode = "c",
+        "<S-Enter>",
+        function()
+            require("noice").redirect(vim.fn.getcmdline())
+        end,
+    },
+}
+
+mappings.neotree = {
+    {
+        desc = "Toggle tree",
+        mode = "n",
+        opts = { silent = true },
+        "<C-n>",
+        "<CMD>Neotree toggle<CR>",
+    },
+}
+
 local M = {}
 
 function M.setup(name, opts)
@@ -103,6 +168,10 @@ function M.setup(name, opts)
 
         vim.keymap.set(mode, keymap[1], keymap[2], o)
     end
+end
+
+function M.init()
+    M.setup("common")
 end
 
 return M

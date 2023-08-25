@@ -8,6 +8,7 @@ local has_words_before = function()
 end
 
 local options = {
+    preselect = cmp.PreselectMode.None,
     snippet = {
         expand = function(args)
             require("luasnip").lsp_expand(args.body)
@@ -34,16 +35,16 @@ local options = {
         { name = "nvim_lua" },
     }),
     mapping = {
-        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-        ["<C-u>"] = cmp.mapping.scroll_docs(4),
+        ["<C-d>"] = cmp.mapping.scroll_docs(4),
+        ["<C-u>"] = cmp.mapping.scroll_docs(-4),
         ["<C-Space>"] = cmp.mapping.complete(),
         ["<C-c>"] = cmp.mapping.abort(),
         ["<C-e>"] = cmp.mapping.close(),
-        ["<CR>"] = cmp.mapping.confirm { select = true },
+        ["<CR>"] = cmp.mapping.confirm({ select = false }),
 
         ["<C-n>"] = cmp.mapping(function()
             if cmp.visible() then
-                cmp.select_next_item { behavior = cmp.SelectBehavior.Insert }
+                cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
             else
                 cmp.complete()
             end
@@ -51,7 +52,7 @@ local options = {
 
         ["<C-p>"] = cmp.mapping(function()
             if cmp.visible() then
-                cmp.select_prev_item { behavior = cmp.SelectBehavior.Insert }
+                cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
             else
                 cmp.complete()
             end
@@ -60,7 +61,7 @@ local options = {
         ["<Tab>"] = cmp.mapping(function(fallback)
             if has_words_before() then
                 if cmp.visible() then
-                    cmp.select_next_item { behavior = cmp.SelectBehavior.Insert }
+                    cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
                 elseif require("luasnip").expand_or_jumpable() then
                     vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
                 else
@@ -77,7 +78,7 @@ local options = {
         ["<S-Tab>"] = cmp.mapping(function(fallback)
             if has_words_before() then
                 if cmp.visible() then
-                    cmp.select_prev_item { behavior = cmp.SelectBehavior.Insert }
+                    cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
                 elseif require("luasnip").jumpable(-1) then
                     vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
                 else

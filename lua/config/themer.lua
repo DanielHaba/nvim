@@ -1,5 +1,5 @@
 local options = {
-    colorscheme = "catppuccin_latte",
+    colorscheme = vim.g.colorscheme,
     enable_installer = true,
 
     remaps = {
@@ -105,6 +105,45 @@ plugins.base = {
     NormalFloat = { fg = palette.fg, bg = palette.bg.alt },
     FloatBorder = { fg = palette.bg.base, bg = palette.bg.alt },
     FloatTitle = { fg = palette.fg, bg = palette.bg.alt },
+}
+
+plugins.notify = {
+    NotifyBackground = { link = "NormalFloat" },
+    NotifyBorder = { link ="FloatBorder" },
+    NotifyERROR = { fg = palette.diagnostic.error },
+    NotifyWARN = { fg = palette.diagnostic.warn },
+    NotifyINFO = { fg = palette.diagnostic.info },
+    NotifyDEBUG = { fg = palette.diagnostic.hint },
+    NotifyTRACE = { fg = palette.diagnostic.hint },
+
+	NotifyERRORBody = { link = "NotifyBackground" },
+	NotifyWARNBody = { link = "NotifyBackground" },
+	NotifyINFOBody = { link = "NotifyBackground" },
+	NotifyDEBUGBody = { link = "NotifyBackground" },
+	NotifyTRACEBody = { link = "NotifyBackground" },
+
+	NotifyERRORBorder = { link = "NotifyBorder" },
+	NotifyWARNBorder = { link = "NotifyBorder" },
+	NotifyINFOBorder = { link = "NotifyBorder" },
+	NotifyDEBUGBorder = { link = "NotifyBorder" },
+	NotifyTRACEBorder = { link = "NotifyBorder" },
+
+
+	NotifyERRORTitle = { link = "NotifyERROR" },
+	NotifyERRORIcon = { link = "NotifyERROR" },
+
+	NotifyWARNTitle = { link = "NotifyWARN" },
+	NotifyWARNIcon = { link = "NotifyWARN" },
+
+	NotifyINFOTitle = { link = "NotifyINFO" },
+	NotifyINFOIcon = { link = "NotifyINFO" },
+
+	NotifyDEBUGTitle = { link = "NotifyDEBUG" },
+	NotifyDEBUGIcon = { link = "NotifyDEBUG" },
+
+	NotifyTRACETitle = { link = "NotifyTRACE" },
+	NotifyTRACEIcon = { link = "NotifyTRACE" },
+
 }
 
 return options

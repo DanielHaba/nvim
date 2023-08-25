@@ -74,8 +74,8 @@ local options = {
             set_jumps = true,
             goto_next_start = {},
             goto_next_end = {},
-            goto_prev_start = {},
-            goto_prev_end = {},
+            goto_previous_start = {},
+            goto_previous_end = {},
         },
         select = {
             enable = true,
@@ -124,8 +124,8 @@ for head, selector in pairs(selectors) do
 
     move.goto_next_start["]" .. head] = selector
     move.goto_next_end["]" .. tail] = selector
-    move.goto_prev_start["[" .. head] = selector
-    move.goto_prev_end["[" .. tail] = selector
+    move.goto_previous_start["[" .. head] = selector
+    move.goto_previous_end["[" .. tail] = selector
     select[head] = selector
 end
 

@@ -1,6 +1,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
--- vim.g.colorscheme = "rose_pine"
+vim.g.colorscheme = "catppuccin_latte"
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
@@ -21,3 +21,5 @@ vim.opt.termguicolors = true
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
+vim.opt.exrc = true
+vim.opt.secure = true

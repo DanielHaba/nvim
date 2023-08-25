@@ -1,0 +1,45 @@
+-- local hook = require("utils.hook")
+--
+-- -- hook("cmp.entry", function(mod)
+-- --     local Format = require("noice.lsp.format")
+-- --
+-- --     mod.get_documentation = function(self)
+-- --         local item = self:get_completion_item()
+-- --
+-- --         local lines = item.documentation and Format.format_markdown(item.documentation) or {}
+-- --         local ret = table.concat(lines, "\n")
+-- --
+-- --         if item.detail and not ret:find(item.detail, 1, true) then
+-- --             local ft = self.context.filetype
+-- --             local dot_index = string.find(ft, "%.")
+-- --             if dot_index ~= nil then
+-- --                 ft = string.sub(ft, 0, dot_index - 1)
+-- --             end
+-- --             ret = ("```%s\n%s\n```\n%s"):format(ft, vim.trim(item.detail), ret)
+-- --         end
+-- --         return vim.split(ret, "\n")
+-- --     end
+-- -- end)
+--
+-- vim.lsp.util.convert_input_to_markdown_lines = function(input, contents)
+--     local Format = require("noice.lsp.format")
+--
+--     contents = contents or {}
+--     local ret = Format.format_markdown(input)
+--     vim.list_extend(contents, ret)
+--     return contents
+-- end
+--
+-- vim.lsp.util.stylize_markdown = function(buf, contents, _opts)
+--     local ns = 0
+--     local Message = require("noice.lsp.message")
+--     local Markdown = require("noice.lsp.markdown")
+--
+--     vim.api.nvim_buf_clear_namespace(buf, ns, 0, -1)
+--     local text = table.concat(contents, "\n")
+--     local message = Message("lsp")
+--     Markdown.format(message, text)
+--     message:render(buf, ns)
+--     Markdown.keys(buf)
+--     return vim.api.nvim_buf_get_lines(buf, 0, -1, false)
+-- end

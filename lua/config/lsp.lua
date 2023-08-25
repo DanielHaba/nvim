@@ -7,9 +7,9 @@ end
 
 capabilities.textDocument.completion.completionItem = {
     documentationFormat = { "markdown", "plaintext" },
-    snippetSupport = true,
-    preselectSupport = true,
-    insertReplaceSupport = true,
+    snippetSupport = false,
+    preselectSupport = false,
+    insertReplaceSupport = false,
     labelDetailsSupport = true,
     deprecatedSupport = true,
     commitCharactersSupport = true,
@@ -35,6 +35,14 @@ lspconfig.omnisharp.setup({
     organize_imports_on_format = true,
     enable_import_completion = true,
 })
+
+require("rust-tools").setup({
+    server = {
+        on_attach = on_attach,
+        capabilities = capabilities,
+    },
+})
+require("rust-tools").inlay_hints.enable()
 
 -- lspconfig.csharp_ls.setup({
 --     on_attach = on_attach,
@@ -96,11 +104,4 @@ for _, server in ipairs({ "html", "cssls", "tsserver", "clangd" }) do
     })
 end
 
-require("rust-tools").setup({
-    server = {
-        on_attach = on_attach,
-        capabilities = capabilities,
-    },
-})
-require("rust-tools").inlay_hints.enable()
 

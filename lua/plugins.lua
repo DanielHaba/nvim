@@ -237,7 +237,7 @@ return {
     },
     {
         "stevearc/dressing.nvim",
-        event = "UIEnter",
+        event = "VimEnter",
         dependencies = {
             "nvim-telescope/telescope.nvim",
         },
@@ -259,7 +259,9 @@ return {
                 },
             },
         },
-        opts = {},
+        opts = function()
+            return require("config.notify")
+        end,
         config = function(_, opts)
             local notify = require("notify")
             notify.setup(opts)
@@ -350,7 +352,7 @@ return {
             "nvim-tree/nvim-web-devicons",
             "neovim/nvim-lspconfig",
         },
-        init = function ()
+        init = function()
             require("config.keymaps").setup("trouble")
         end,
         opts = {},
@@ -368,7 +370,7 @@ return {
             "TroubleToggle",
             "TroubleRefresh",
         },
-        init = function ()
+        init = function()
             require("config.keymaps").setup("trouble")
         end,
         opts = {
@@ -378,17 +380,50 @@ return {
     },
 
     {
+        "nvim-neo-tree/neo-tree.nvim",
+        branch = "v3.x",
+        dependencies = {
+          "nvim-lua/plenary.nvim",
+          "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+          "MunifTanjim/nui.nvim",
+        },
+        cmd = {
+            "Neotree",
+        },
+        init = function ()
+            require("config.keymaps").setup("neotree")
+        end,
+        opts = function()
+            return require("config.neo-tree")
+        end,
+    },
+
+    {
+        enabled = false,
         "folke/noice.nvim",
         event = "VeryLazy",
         dependencies = {
             "MunifTanjim/nui.nvim",
             "rcarriga/nvim-notify",
         },
+        init = function ()
+            require("config.keymaps").setup("noice")
+        end,
         opts = function()
             return require("config.noice")
         end,
     },
 
+    {
+        enabled = true,
+        "folke/which-key.nvim",
+        event = "VeryLazy",
+        init = function()
+            vim.o.timeout = true
+            vim.o.timeoutlen = 300
+        end,
+        opts = {},
+    },
 
     { "Hoffs/omnisharp-extended-lsp.nvim" },
     { "simrat39/rust-tools.nvim" },
