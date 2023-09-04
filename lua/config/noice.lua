@@ -1,5 +1,10 @@
 local options = {
+    cmdline = {
+        enabled = true,
+        backend = "cmdline_popup"
+    },
     popupmenu = {
+        enabled = true,
         backend = "nui",
     },
     hover = {
@@ -16,7 +21,8 @@ local options = {
         },
     },
     presets = {
-        bottom_search = true,
+        bottom_search = false,
+        command_palette = true,
     },
     routes = {
         {

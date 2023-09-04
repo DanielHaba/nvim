@@ -1,6 +1,17 @@
+local mason_registry = require("mason-registry")
 local lspconfig = require("lspconfig")
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 local on_attach = function(client, bufnr)
+
+    if type(vim.g.lsp_disable) == "table" then
+        for _, disabled in ipairs(vim.g.lsp_disable) do
+            if disabled == client.name then
+                client.stop()
+                return
+            end
+        end
+    end
+
     require("config.keymaps").setup("lsp", { buffer = bufnr })
     require("virtualtypes").on_attach(client, bufnr)
 end
@@ -36,10 +47,22 @@ lspconfig.omnisharp.setup({
     enable_import_completion = true,
 })
 
+local codelldb = mason_registry.get_package("codelldb")
+local codelldb_path = codelldb:get_install_path() .. "/extension/adapter/codelldb"
+local liblldb_path = codelldb:get_install_path() .. "/extension/lldb/lib/liblldb.so"
+
 require("rust-tools").setup({
     server = {
         on_attach = on_attach,
         capabilities = capabilities,
+    },
+    tools = {
+        on_initialized = function ()
+            vim.lsp.codelens.refresh()
+        end,
+    },
+    dap = {
+        adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
     },
 })
 require("rust-tools").inlay_hints.enable()
@@ -97,11 +120,9 @@ lspconfig.yamlls.setup({
     },
 })
 
-for _, server in ipairs({ "html", "cssls", "tsserver", "clangd" }) do
+for _, server in ipairs({ "html", "cssls", "tsserver", "clangd", "lemminx" }) do
     lspconfig[server].setup({
         on_attach = on_attach,
         capabilities = capabilities,
     })
 end
-
-

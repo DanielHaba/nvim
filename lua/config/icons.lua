@@ -28,6 +28,11 @@ icons.lsp = {
     TypeParameter = "",
 }
 
+icons.dap = {
+    breakpoint = "🟥",
+    stopped = "▶️",
+}
+
 icons.diagnostics = {
     error = "",
     warning = "",

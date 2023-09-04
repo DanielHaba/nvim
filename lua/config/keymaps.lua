@@ -122,6 +122,51 @@ mappings.common = {
     },
 }
 
+mappings.hardmode = {
+    {
+		desc = "Hardmode",
+		mode = { "n", "i", "v" },
+		opts = { remap = false },
+		"<Left>",
+		"<Cmd>echoerr 'bad human'<CR>",
+	},
+    {
+		desc = "Hardmode",
+		mode = { "n", "i", "v" },
+		opts = { remap = false },
+		"<Right>",
+		"<Cmd>echoerr 'bad human'<CR>",
+	},
+    {
+		desc = "Hardmode",
+		mode = { "n", "i", "v" },
+		opts = { remap = false },
+		"<Down>",
+		"<Cmd>echoerr 'bad human'<CR>",
+	},
+    {
+		desc = "Hardmode",
+		mode = { "n", "i", "v" },
+		opts = { remap = false },
+		"<Up>",
+		"<Cmd>echoerr 'bad human'<CR>",
+	},
+    {
+		desc = "Hardmode",
+		mode = { "n", "i", "v" },
+		opts = { remap = false },
+		"<PageDown>",
+		"<Cmd>echoerr 'bad human'<CR>",
+	},
+    {
+		desc = "Hardmode",
+		mode = { "n", "i", "v" },
+		opts = { remap = false },
+		"<PageUp>",
+		"<Cmd>echoerr 'bad human'<CR>",
+	},
+}
+
 mappings.lsp = {
     {
         desc = "Go to declaration",
@@ -170,6 +215,12 @@ mappings.lsp = {
         mode = { "n", "v" },
         "<Leader>ra",
         function() vim.lsp.buf.code_action() end,
+    },
+    {
+        desc = "Code lens run",
+        mode = "n",
+        "<Leader>rr",
+        function() vim.lsp.codelens.run() end,
     },
     {
         desc = "Next diagnostics",
@@ -240,6 +291,60 @@ mappings.neotree = {
     },
 }
 
+mappings.dap = {
+    {
+        desc = "Toggle breakpoint",
+        mode = "n",
+        "<Leader>b",
+        function ()
+            require("dap").toggle_breakpoint()
+        end,
+    },
+}
+
+mappings.dap_session = {
+    {
+        desc = "Continue",
+        mode = "n",
+        "<F8>",
+        function ()
+            require("dap").continue()
+        end,
+    },
+    {
+        desc = "Step over",
+        mode = "n",
+        "<F10>",
+        function ()
+            require("dap").step_over()
+        end,
+    },
+    {
+        desc = "Step into",
+        mode = "n",
+        "<F11>",
+        function ()
+            require("dap").step_into()
+        end,
+    },
+    {
+        desc = "Step out",
+        mode = "n",
+        "<F12>",
+        function ()
+            require("dap").step_out()
+        end,
+    },
+    -- {
+    --     desc = "Repl",
+    --     mode = "n",
+    --     "<>",
+    --     function ()
+    --         require("dap").repl.open()
+    --     end,
+    -- },
+}
+
 local M = {}
 
 function M.setup(name, opts)
@@ -256,6 +361,7 @@ end
 
 function M.init()
     M.setup("common")
+    M.setup("hardmode")
 end
 
 return M

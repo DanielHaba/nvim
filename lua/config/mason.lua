@@ -26,7 +26,9 @@ local options = {
     },
     dap = {
         automatic_installation = true,
-        ensure_installed = {},
+        ensure_installed = {
+            "codelldb",
+        },
     },
     null_ls = {
         automatic_installation = true,

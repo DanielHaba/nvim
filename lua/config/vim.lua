@@ -1,6 +1,7 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.g.colorscheme = "catppuccin_latte"
+vim.g.shell = "/home/daniel/.cargo/bin/nu"
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
@@ -20,6 +21,8 @@ vim.opt.termguicolors = true
 --vim.opt.scrolloff = 40
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
+vim.opt.mouse=""
 
 vim.opt.exrc = true
 vim.opt.secure = true
+

@@ -1,3 +1,14 @@
+local parsers = require("nvim-treesitter.parsers").get_parser_configs()
+parsers.nu = {
+    install_info = {
+        url = "https://github.com/nushell/tree-sitter-nu",
+        files = { "src/parser.c" },
+        branch = "main",
+    },
+    filetype = "nu",
+}
+
+
 local options = {
     ensure_installed = {
         -- general
@@ -9,6 +20,7 @@ local options = {
         "sql",
         "graphql",
         "dockerfile",
+        "nu",
 
         -- git
         "diff",

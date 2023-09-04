@@ -100,6 +100,7 @@ return {
             require("config.null_ls")
         end,
     },
+
     {
         "mfussenegger/nvim-dap",
         dependencies = {
@@ -121,13 +122,18 @@ return {
                 dependencies = {
                     "nvim-treesitter/nvim-treesitter",
                 },
+                opts = {},
             },
-            { "rcarriga/nvim-dap-ui" },
+            {
+                "rcarriga/nvim-dap-ui",
+                opts = {},
+            },
         },
         config = function()
             require("config.dap")
         end,
     },
+
     {
         "hrsh7th/nvim-cmp",
         event = "InsertEnter",
@@ -193,6 +199,7 @@ return {
             end
         end,
     },
+
     {
         "themercorp/themer.lua",
         event = "UIEnter",
@@ -215,6 +222,7 @@ return {
             return require("config.themer")
         end,
     },
+
     {
         "olimorris/persisted.nvim",
         event = "VeryLazy",
@@ -340,23 +348,6 @@ return {
             require("illuminate").configure()
         end,
     },
-    {
-        "folke/trouble.nvim",
-        cmd = {
-            "Trouble",
-            "TroubleClose",
-            "TroubleToggle",
-            "TroubleRefresh",
-        },
-        dependencies = {
-            "nvim-tree/nvim-web-devicons",
-            "neovim/nvim-lspconfig",
-        },
-        init = function()
-            require("config.keymaps").setup("trouble")
-        end,
-        opts = {},
-    },
 
     {
         "folke/trouble.nvim",
@@ -383,14 +374,14 @@ return {
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v3.x",
         dependencies = {
-          "nvim-lua/plenary.nvim",
-          "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-          "MunifTanjim/nui.nvim",
+            "nvim-lua/plenary.nvim",
+            "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+            "MunifTanjim/nui.nvim",
         },
         cmd = {
             "Neotree",
         },
-        init = function ()
+        init = function()
             require("config.keymaps").setup("neotree")
         end,
         opts = function()
@@ -399,14 +390,13 @@ return {
     },
 
     {
-        enabled = false,
         "folke/noice.nvim",
         event = "VeryLazy",
         dependencies = {
             "MunifTanjim/nui.nvim",
             "rcarriga/nvim-notify",
         },
-        init = function ()
+        init = function()
             require("config.keymaps").setup("noice")
         end,
         opts = function()
@@ -423,6 +413,21 @@ return {
             vim.o.timeoutlen = 300
         end,
         opts = {},
+    },
+
+    {
+        "LhKipp/nvim-nu",
+        event = "VeryLazy",
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+            "jose-elias-alvarez/null-ls.nvim",
+        },
+        opts = {},
+        config = function(_, opts)
+            local nu = require("nu")
+            nu.setup(opts)
+            nu._init()
+        end
     },
 
     { "Hoffs/omnisharp-extended-lsp.nvim" },

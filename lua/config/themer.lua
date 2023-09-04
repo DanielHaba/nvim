@@ -109,41 +109,78 @@ plugins.base = {
 
 plugins.notify = {
     NotifyBackground = { link = "NormalFloat" },
-    NotifyBorder = { link ="FloatBorder" },
+    NotifyBorder = { link = "FloatBorder" },
     NotifyERROR = { fg = palette.diagnostic.error },
     NotifyWARN = { fg = palette.diagnostic.warn },
     NotifyINFO = { fg = palette.diagnostic.info },
     NotifyDEBUG = { fg = palette.diagnostic.hint },
     NotifyTRACE = { fg = palette.diagnostic.hint },
 
-	NotifyERRORBody = { link = "NotifyBackground" },
-	NotifyWARNBody = { link = "NotifyBackground" },
-	NotifyINFOBody = { link = "NotifyBackground" },
-	NotifyDEBUGBody = { link = "NotifyBackground" },
-	NotifyTRACEBody = { link = "NotifyBackground" },
+    NotifyERRORBody = { link = "NotifyBackground" },
+    NotifyWARNBody = { link = "NotifyBackground" },
+    NotifyINFOBody = { link = "NotifyBackground" },
+    NotifyDEBUGBody = { link = "NotifyBackground" },
+    NotifyTRACEBody = { link = "NotifyBackground" },
 
-	NotifyERRORBorder = { link = "NotifyBorder" },
-	NotifyWARNBorder = { link = "NotifyBorder" },
-	NotifyINFOBorder = { link = "NotifyBorder" },
-	NotifyDEBUGBorder = { link = "NotifyBorder" },
-	NotifyTRACEBorder = { link = "NotifyBorder" },
+    NotifyERRORBorder = { link = "NotifyBorder" },
+    NotifyWARNBorder = { link = "NotifyBorder" },
+    NotifyINFOBorder = { link = "NotifyBorder" },
+    NotifyDEBUGBorder = { link = "NotifyBorder" },
+    NotifyTRACEBorder = { link = "NotifyBorder" },
 
 
-	NotifyERRORTitle = { link = "NotifyERROR" },
-	NotifyERRORIcon = { link = "NotifyERROR" },
+    NotifyERRORTitle = { link = "NotifyERROR" },
+    NotifyERRORIcon = { link = "NotifyERROR" },
 
-	NotifyWARNTitle = { link = "NotifyWARN" },
-	NotifyWARNIcon = { link = "NotifyWARN" },
+    NotifyWARNTitle = { link = "NotifyWARN" },
+    NotifyWARNIcon = { link = "NotifyWARN" },
 
-	NotifyINFOTitle = { link = "NotifyINFO" },
-	NotifyINFOIcon = { link = "NotifyINFO" },
+    NotifyINFOTitle = { link = "NotifyINFO" },
+    NotifyINFOIcon = { link = "NotifyINFO" },
 
-	NotifyDEBUGTitle = { link = "NotifyDEBUG" },
-	NotifyDEBUGIcon = { link = "NotifyDEBUG" },
+    NotifyDEBUGTitle = { link = "NotifyDEBUG" },
+    NotifyDEBUGIcon = { link = "NotifyDEBUG" },
 
-	NotifyTRACETitle = { link = "NotifyTRACE" },
-	NotifyTRACEIcon = { link = "NotifyTRACE" },
+    NotifyTRACETitle = { link = "NotifyTRACE" },
+    NotifyTRACEIcon = { link = "NotifyTRACE" },
+}
 
+plugins.dap = {
+    DapBreakpoint = { fg = palette.gitsigns["remove"] },
+    DapStopped = { fg = palette.border },
+
+    DapUINormalFloat = { link = "NormalFloat" },
+    DapUIFloatBorder = { link = "FloatBorder" },
+    DapUINormal = { link = "Normal" },
+
+    DapUIVariable = { fg = palette.syntax["variable"] },
+    DapUIValue = { fg = palette.fg },
+    DapUIModifiedValue = { fg = palette.fg, bold = true },
+    DapUIFrameName = { fg = palette.syntax["function"] },
+
+    DapUIScope = { fg = palette.syntax["function"] },
+    DapUIType = { fg = palette.syntax["type"] },
+    DapUIDecoration = { fg = palette.accent },
+    DapUIThread = { fg = palette.syntax["function"] },
+    DapUIStoppedThread = { fg = color.blend(palette.syntax["function"], palette.syntax["variable"], 0.3) },
+    DapUISource = { fg = palette.syntax["string"] },
+    DapUILineNumber = { fg = palette.syntax["number"] },
+    DapUIWatchesEmpty = { fg = palette.diagnostic["hint"] },
+    DapUIWatchesValue = { link = "DapUIValue" },
+    DapUIWatchesError = { fg = palette.diagnostic["error"] },
+    DapUIBreakpointsPath = { fg = palette.syntax["string"] },
+    DapUIBreakpointsInfo = { fg = palette.syntax["comment"] },
+    DapUIBreakpointsCurrentLine = { fg = palette.cursorlinenr },
+    DapUIBreakpointsDisabledLine = { fg = palette.cursorlinenr, stroketrhough = true },
+    DapUIStepOver = { fg = palette.accent },
+    DapUIStepInto = { fg = palette.accent },
+    DapUIStepBack = { fg = palette.accent },
+    DapUIStepOut = { fg = palette.accent },
+    DapUIStop = { fg = palette.gitsigns["remove"] },
+    DapUIPlayPause = { fg = palette.gitsigns["add"] },
+    DapUIRestart = { fg = palette.gitsigns["add"] },
+    DapUIUnavailable = { fg = palette.syntax["comment"] },
+    DapUIWinSelect = { fg = palette.accent },
 }
 
 return options

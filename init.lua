@@ -58,10 +58,14 @@ for hl, icon in pairs({ Error = icons.diagnostics.error, Warn = icons.diagnostic
     hl = "DiagnosticSign" .. hl
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
+for hl, icon in pairs({ Breakpoint = icons.dap.breakpoint, Stopped = icons.dap.stopped }) do
+    hl = "Dap" .. hl
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
 
 vim.api.nvim_create_autocmd("UIEnter", {
     callback = function()
         require("config.keymaps").init()
-        require("config.hooks")
+        -- require("config.hooks")
     end,
 })
