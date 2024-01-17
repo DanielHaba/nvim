@@ -104,6 +104,7 @@ plugins.telescope = {
 plugins.base = {
     NormalFloat = { fg = palette.fg, bg = palette.bg.alt },
     FloatBorder = { fg = palette.bg.base, bg = palette.bg.alt },
+    FloatBorderFlat = { fg = palette.bg.alt, bg = "NONE" },
     FloatTitle = { fg = palette.fg, bg = palette.bg.alt },
 }
 

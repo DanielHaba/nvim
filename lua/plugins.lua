@@ -19,6 +19,7 @@ return {
         dependencies = {
             "nvim-treesitter/nvim-treesitter-textobjects",
             "RRethy/nvim-treesitter-textsubjects",
+            "windwp/nvim-ts-autotag",
             "nvim-treesitter/playground",
         },
         opts = function()
@@ -71,6 +72,10 @@ return {
                 opts = function()
                     return require("config.mason").lsp
                 end,
+            },
+            {
+                "lvimuser/lsp-inlayhints.nvim",
+                opts = {},
             },
             { "jubnzv/virtual-types.nvim" },
         },
@@ -155,6 +160,7 @@ return {
                 "hrsh7th/cmp-nvim-lsp",
                 "hrsh7th/cmp-nvim-lsp-signature-help",
                 "hrsh7th/cmp-nvim-lua",
+                "saadparwaiz1/cmp_luasnip",
             },
         },
         opts = function()
@@ -273,7 +279,7 @@ return {
         config = function(_, opts)
             local notify = require("notify")
             notify.setup(opts)
-            vim.notify = notify
+            -- vim.notify = notify
         end,
     },
     {
@@ -297,6 +303,7 @@ return {
     },
     {
         "lukas-reineke/indent-blankline.nvim",
+        tag = "v2.20.8",
         event = { "BufReadPre", "BufNewFile" },
         opts = {
             filetype_exclude = {
@@ -391,7 +398,7 @@ return {
 
     {
         "folke/noice.nvim",
-        event = "VeryLazy",
+        event = "VimEnter",
         dependencies = {
             "MunifTanjim/nui.nvim",
             "rcarriga/nvim-notify",
@@ -402,7 +409,20 @@ return {
         opts = function()
             return require("config.noice")
         end,
+        config = function(_, opts)
+            local noice = require("noice")
+            noice.setup(opts)
+            vim.notify = noice.notify
+        end,
     },
+
+    -- {
+    --     "nathom/filetype.nvim",
+    --     event = "VeryLazy",
+    --     opts = function ()
+    --         return require("config.filetype")
+    --     end,
+    -- },
 
     {
         enabled = true,
@@ -430,7 +450,28 @@ return {
         end
     },
 
+    {
+        "mbbill/undotree",
+        cmd = {
+            "UndotreeToggle",
+        },
+    },
+    {
+        "simrat39/rust-tools.nvim",
+        dependencies = {
+            {
+                "saecki/crates.nvim",
+                tag = "stable",
+                dependencies = { "nvim-lua/plenary.nvim" },
+                config = function()
+                    require("crates").setup()
+                end,
+            },
+        },
+    },
+
     { "Hoffs/omnisharp-extended-lsp.nvim" },
-    { "simrat39/rust-tools.nvim" },
+    { "ray-x/go.nvim" },
+    { "mfussenegger/nvim-dap-python" },
     { "b0o/schemastore.nvim" },
 }

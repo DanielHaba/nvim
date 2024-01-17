@@ -120,6 +120,20 @@ mappings.common = {
         "<Leader>sk",
         "<Cmd>set nosplitbelow<CR><Cmd>split<CR>",
     },
+    {
+        desc = "Undo tree",
+        mode = { "n" },
+        opts = { silent = true },
+        "<Leader>u",
+        "<Cmd>UndotreeToggle<CR>",
+    },
+    -- {
+    --     desc = "Sudo save",
+    --     mode = { "c" },
+    --     opts = { remap = false },
+    --     "w!",
+    --     "<Cmd>w !sudo tee %<CR>",
+    -- }
 }
 
 mappings.hardmode = {
@@ -306,7 +320,7 @@ mappings.dap_session = {
     {
         desc = "Continue",
         mode = "n",
-        "<F8>",
+        "<F6>",
         function ()
             require("dap").continue()
         end,
@@ -314,7 +328,7 @@ mappings.dap_session = {
     {
         desc = "Step over",
         mode = "n",
-        "<F10>",
+        "<F7>",
         function ()
             require("dap").step_over()
         end,
@@ -322,7 +336,7 @@ mappings.dap_session = {
     {
         desc = "Step into",
         mode = "n",
-        "<F11>",
+        "<F8>",
         function ()
             require("dap").step_into()
         end,
@@ -330,7 +344,7 @@ mappings.dap_session = {
     {
         desc = "Step out",
         mode = "n",
-        "<F12>",
+        "<F9>",
         function ()
             require("dap").step_out()
         end,

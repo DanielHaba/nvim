@@ -55,6 +55,9 @@ local options = {
         "gosum",
         "gowork",
 
+        -- python
+        "python",
+
         -- web
         "html",
         "css",
@@ -101,6 +104,9 @@ local options = {
         keymaps = {
             ["<C-Space>"] = "textsubjects-smart",
         },
+    },
+    autotag = {
+        enable = true,
     },
     playground = {
         enable = true,

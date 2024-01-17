@@ -17,3 +17,15 @@ end
 require("config.keymaps").setup("dap")
 require("config.keymaps").setup("dap_session")
 
+
+require("dap-python").setup()
+
+require("dap").configurations.python = {
+    {
+        type = "python",
+        request = "launch",
+        name = "Launch (all code)",
+        justMyCode = false,
+        program = "${file}",
+    },
+}

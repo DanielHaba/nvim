@@ -22,6 +22,7 @@ local options = {
             "taplo",
             "lemminx",
             "yamlls",
+            "pylsp",
         },
     },
     dap = {

@@ -13,6 +13,9 @@ local options = {
     signature = {
         enabled = false,
     },
+    notify = {
+        merge = true,
+    },
     lsp = {
         override = {
             ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
@@ -24,17 +27,41 @@ local options = {
         bottom_search = false,
         command_palette = true,
     },
+    views = {
+        cmdline_popup = {
+            border = {
+                style = "none",
+                padding = { 1, 1 },
+            },
+            filter_options = {},
+            win_options = {
+                winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorderFlat",
+            },
+        },
+    },
     routes = {
+        {
+            view = "mini",
+            filter = {
+                event = "msg_show",
+                kind = "",
+                find = "written",
+            },
+            opts = { stop = true },
+        },
         {
             filter = {
                 event = "msg_show",
-                any = {
-                    { find = "%d+L, %d+B" },
-                    { find = "; after #%d+" },
-                    { find = "; before #%d+" },
-                },
+                kind = "search_count",
             },
-            view = "mini",
+            opts = { skip = true },
+        },
+        {
+            filter = {
+                event = "notify",
+                find = "not support",
+            },
+            opts = { skip = true },
         },
         {
             view = "cmdline_output",

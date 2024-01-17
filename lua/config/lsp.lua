@@ -12,6 +12,7 @@ local on_attach = function(client, bufnr)
         end
     end
 
+    require("lsp-inlayhints").on_attach(client, bufnr)
     require("config.keymaps").setup("lsp", { buffer = bufnr })
     require("virtualtypes").on_attach(client, bufnr)
 end
@@ -55,17 +56,42 @@ require("rust-tools").setup({
     server = {
         on_attach = on_attach,
         capabilities = capabilities,
+        settings = {
+            ["rust-analyzer"] = {
+                -- rust-analyzer.completion.callable.snippets
+                -- rust-analyzer.completion.fullFunctionSignatures.enable
+                -- rust-analyzer.lens.references.adt.enable
+                completion = {
+                    callable = {
+                        snippets = false,
+                    },
+                },
+                procMacro = {
+                    enable = true,
+                },
+            },
+        },
     },
     tools = {
         on_initialized = function ()
             vim.lsp.codelens.refresh()
         end,
+        float_win_config = {
+            borders = "none",
+        },
     },
     dap = {
         adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
     },
 })
-require("rust-tools").inlay_hints.enable()
+
+require("go").setup({
+    lsp_on_attach = on_attach,
+    lsp_cfg = {
+        capabilities = capabilities,
+    },
+    lsp_keymaps = false,
+})
 
 -- lspconfig.csharp_ls.setup({
 --     on_attach = on_attach,
@@ -120,7 +146,28 @@ lspconfig.yamlls.setup({
     },
 })
 
-for _, server in ipairs({ "html", "cssls", "tsserver", "clangd", "lemminx" }) do
+lspconfig.clangd.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+})
+
+lspconfig.pylsp.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+    settings = {
+        pylsp = {
+            plugins = {
+                pycodestyle = {
+                    enabled = true,
+                    ignore = { "E201", "E303", "E501" },
+                    maxLineLength = 180,
+                },
+            },
+        },
+    },
+})
+
+for _, server in ipairs({ "html", "tsserver", "clangd", "lemminx" }) do
     lspconfig[server].setup({
         on_attach = on_attach,
         capabilities = capabilities,
