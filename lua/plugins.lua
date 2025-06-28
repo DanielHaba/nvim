@@ -21,6 +21,8 @@ return {
             "RRethy/nvim-treesitter-textsubjects",
             "windwp/nvim-ts-autotag",
             "nvim-treesitter/playground",
+
+            "nushell/tree-sitter-nu",
         },
         opts = function()
             return require("config.treesitter")
@@ -74,35 +76,16 @@ return {
                 end,
             },
             {
-                "lvimuser/lsp-inlayhints.nvim",
+                "ckolkey/ts-node-action",
+                dependencies = {
+                    "nvim-treesitter",
+                },
                 opts = {},
             },
             { "jubnzv/virtual-types.nvim" },
         },
         config = function()
             require("config.lsp")
-        end,
-    },
-    {
-        "jose-elias-alvarez/null-ls.nvim",
-        event = "VeryLazy",
-        dependencies = {
-            {
-                "jay-babu/mason-null-ls.nvim",
-                cmd = {
-                    "NullLsInstall",
-                    "NullLsUninstall",
-                },
-                dependencies = {
-                    "williamboman/mason.nvim",
-                },
-                opts = function()
-                    return require("config.mason").null_ls
-                end,
-            },
-        },
-        config = function()
-            require("config.null_ls")
         end,
     },
 
@@ -123,14 +106,17 @@ return {
                 end,
             },
             {
-                "theHamsta/nvim-dap-virtual-text",
+                "rcarriga/nvim-dap-ui",
                 dependencies = {
-                    "nvim-treesitter/nvim-treesitter",
+                    "nvim-neotest/nvim-nio",
                 },
                 opts = {},
             },
             {
-                "rcarriga/nvim-dap-ui",
+                "theHamsta/nvim-dap-virtual-text",
+                dependencies = {
+                    "nvim-treesitter/nvim-treesitter",
+                },
                 opts = {},
             },
         },
@@ -423,6 +409,34 @@ return {
     --         return require("config.filetype")
     --     end,
     -- },
+    
+    {
+        "nvimtools/none-ls.nvim",
+        event = "VeryLazy",
+        dependencies = {
+
+        },
+        config = function ()
+            return require("config.null_ls") 
+        end,
+    },
+    {
+        "jay-babu/mason-null-ls.nvim",
+        event = { "BufReadPre", "BufNewFile" },
+        dependencies = {
+            "williamboman/mason.nvim",
+            {
+                "nvimtools/none-ls.nvim",
+                event = "VeryLazy",
+                config = function()
+                    require("config.null_ls")
+                end,
+            },
+        },
+        opts = function()
+            return require("config.mason").null_ls
+        end,
+    },
 
     {
         enabled = true,
@@ -438,16 +452,14 @@ return {
     {
         "LhKipp/nvim-nu",
         event = "VeryLazy",
+        build = ":TSInstall nu",
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
-            "jose-elias-alvarez/null-ls.nvim",
+            "nvimtools/none-ls.nvim",
         },
-        opts = {},
-        config = function(_, opts)
-            local nu = require("nu")
-            nu.setup(opts)
-            nu._init()
-        end
+        opts = {
+            use_lsp_features = true,
+        },
     },
 
     {
@@ -456,8 +468,10 @@ return {
             "UndotreeToggle",
         },
     },
+
     {
-        "simrat39/rust-tools.nvim",
+        "mrcjkb/rustaceanvim",
+        version = "^5",
         dependencies = {
             {
                 "saecki/crates.nvim",
@@ -469,9 +483,18 @@ return {
             },
         },
     },
+    {
+        "ray-x/go.nvim",
+        dependencies = {
+            "neovim/nvim-lspconfig",
+            "nvim-treesitter/nvim-treesitter",
+        },
+        build = ':lua require("go.install").update_all_sync()'
+    },
 
     { "Hoffs/omnisharp-extended-lsp.nvim" },
-    { "ray-x/go.nvim" },
     { "mfussenegger/nvim-dap-python" },
+    { "leoluz/nvim-dap-go" },
     { "b0o/schemastore.nvim" },
+    { "lewis6991/gitsigns.nvim" },
 }

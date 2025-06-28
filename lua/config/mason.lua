@@ -15,7 +15,7 @@ local options = {
             "graphql",
             "html",
             "jsonls",
-            "tsserver",
+            "ts_ls",
             "lua_ls",
             "rust_analyzer",
             "sqlls",
@@ -23,17 +23,19 @@ local options = {
             "lemminx",
             "yamlls",
             "pylsp",
+            "terraformls",
+            "buf_ls",
         },
+    },
+    null_ls = {
+        automatic_installation = true,
+        ensure_installed = {},
     },
     dap = {
         automatic_installation = true,
         ensure_installed = {
             "codelldb",
         },
-    },
-    null_ls = {
-        automatic_installation = true,
-        ensure_installed = {},
     },
     ui = {
         icons = {

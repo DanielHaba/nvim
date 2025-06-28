@@ -19,13 +19,31 @@ require("config.keymaps").setup("dap_session")
 
 
 require("dap-python").setup()
+require('dap-go').setup()
 
-require("dap").configurations.python = {
+dap.configurations.python = {
     {
         type = "python",
         request = "launch",
         name = "Launch (all code)",
         justMyCode = false,
         program = "${file}",
+    },
+}
+
+dap.configurations.go = { 
+    {
+        type = "go",
+        name = "Debug (Build Flags)",
+        request = "launch",
+        program = "${file}",
+        buildFlags = require("dap-go").get_build_flags,
+    },
+    {
+        -- Must be "go" or it will be ignored by the plugin
+        type = "go",
+        name = "Attach remote",
+        mode = "remote",
+        request = "attach",
     },
 }

@@ -1,4 +1,4 @@
-local mason_registry = require("mason-registry")
+-- local mason_registry = require("mason-registry")
 local lspconfig = require("lspconfig")
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 local on_attach = function(client, bufnr)
@@ -12,7 +12,6 @@ local on_attach = function(client, bufnr)
         end
     end
 
-    require("lsp-inlayhints").on_attach(client, bufnr)
     require("config.keymaps").setup("lsp", { buffer = bufnr })
     require("virtualtypes").on_attach(client, bufnr)
 end
@@ -48,47 +47,61 @@ lspconfig.omnisharp.setup({
     enable_import_completion = true,
 })
 
-local codelldb = mason_registry.get_package("codelldb")
-local codelldb_path = codelldb:get_install_path() .. "/extension/adapter/codelldb"
-local liblldb_path = codelldb:get_install_path() .. "/extension/lldb/lib/liblldb.so"
+-- local codelldb = mason_registry.get_package("codelldb")
+-- local codelldb_path = codelldb:get_install_path() .. "/extension/adapter/codelldb"
+-- local liblldb_path = codelldb:get_install_path() .. "/extension/lldb/lib/liblldb.so"
 
-require("rust-tools").setup({
+vim.g.rustaceanvim = {
+    tools = {},
     server = {
         on_attach = on_attach,
         capabilities = capabilities,
-        settings = {
-            ["rust-analyzer"] = {
-                -- rust-analyzer.completion.callable.snippets
-                -- rust-analyzer.completion.fullFunctionSignatures.enable
-                -- rust-analyzer.lens.references.adt.enable
-                completion = {
-                    callable = {
-                        snippets = false,
-                    },
-                },
-                procMacro = {
-                    enable = true,
-                },
-            },
-        },
     },
-    tools = {
-        on_initialized = function ()
-            vim.lsp.codelens.refresh()
-        end,
-        float_win_config = {
-            borders = "none",
-        },
-    },
-    dap = {
-        adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
-    },
-})
+}
+
+require("rustaceanvim")
+-- require("rust-tools").setup({
+--     server = {
+--         on_attach = on_attach,
+--         capabilities = capabilities,
+--         settings = {
+--             ["rust-analyzer"] = {
+--                 -- rust-analyzer.completion.callable.snippets
+--                 -- rust-analyzer.completion.fullFunctionSignatures.enable
+--                 -- rust-analyzer.lens.references.adt.enable
+--                 completion = {
+--                     callable = {
+--                         snippets = false,
+--                     },
+--                 },
+--                 procMacro = {
+--                     enable = true,
+--                 },
+--             },
+--         },
+--     },
+--     tools = {
+--         on_initialized = function ()
+--             vim.lsp.codelens.refresh()
+--         end,
+--         float_win_config = {
+--             borders = "none",
+--         },
+--     },
+--     dap = {
+--         adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
+--     },
+-- })
 
 require("go").setup({
     lsp_on_attach = on_attach,
     lsp_cfg = {
         capabilities = capabilities,
+        settings = {
+            gopls =  {
+                buildFlags = { "-tags=acceptance" },
+            },
+        },
     },
     lsp_keymaps = false,
 })
@@ -146,11 +159,6 @@ lspconfig.yamlls.setup({
     },
 })
 
-lspconfig.clangd.setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-})
-
 lspconfig.pylsp.setup({
     on_attach = on_attach,
     capabilities = capabilities,
@@ -167,7 +175,33 @@ lspconfig.pylsp.setup({
     },
 })
 
-for _, server in ipairs({ "html", "tsserver", "clangd", "lemminx" }) do
+lspconfig.clangd.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = {
+        "clangd",
+        "--clang-tidy",
+        "--enable-config",
+        "--background-index",
+        "--log=verbose",
+    },
+    init_options = {
+        fallbackFlags = {
+            "-I/usr/avr/include",
+        },
+    },
+    root_markers = {
+        ".clangd",
+        ".clang-tidy",
+        ".clang-format",
+        "compile_commands.json",
+        "compile_flags.txt",
+        "configure.ac", -- AutoTools
+        ".git",
+    },
+})
+
+for _, server in ipairs({ "html", "ts_ls", "lemminx", "terraformls", "buf_ls", "sqlls" }) do
     lspconfig[server].setup({
         on_attach = on_attach,
         capabilities = capabilities,

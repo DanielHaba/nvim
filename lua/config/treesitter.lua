@@ -1,12 +1,22 @@
 local parsers = require("nvim-treesitter.parsers").get_parser_configs()
-parsers.nu = {
+
+parsers.gotmpl = {
     install_info = {
-        url = "https://github.com/nushell/tree-sitter-nu",
+        url = "https://github.com/ngalaiko/tree-sitter-go-template",
         files = { "src/parser.c" },
-        branch = "main",
     },
-    filetype = "nu",
+    filetype = "gotmpl",
+    used_by = { "gohtmltmpl", "gotexttmpl", "gotmpl", "yaml" }
 }
+
+-- parsers.nu = {
+--     install_info = {
+--         url = "https://github.com/nushell/tree-sitter-nu",
+--         files = { "src/parser.c" },
+--         branch = "main",
+--     },
+--     filetype = "nu",
+-- }
 
 
 local options = {
@@ -20,8 +30,10 @@ local options = {
         "sql",
         "graphql",
         "dockerfile",
+        "proto",
         "nu",
 
+        "comment",
         -- git
         "diff",
         "git_config",
@@ -35,6 +47,7 @@ local options = {
         "toml",
         "json",
         "jsonc",
+        "terraform",
 
         -- c
         "cmake",
@@ -54,6 +67,7 @@ local options = {
         "gomod",
         "gosum",
         "gowork",
+        "gotmpl",
 
         -- python
         "python",

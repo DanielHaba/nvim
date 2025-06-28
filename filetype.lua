@@ -1,5 +1,7 @@
 vim.filetype.add({
     extension = {
-        png = "image",
+        -- png = "image",
+        tf = "terraform",
+        tfvars = "terraform",
     },
 })
