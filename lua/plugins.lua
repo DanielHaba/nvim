@@ -401,25 +401,6 @@ return {
             vim.notify = noice.notify
         end,
     },
-
-    -- {
-    --     "nathom/filetype.nvim",
-    --     event = "VeryLazy",
-    --     opts = function ()
-    --         return require("config.filetype")
-    --     end,
-    -- },
-    
-    {
-        "nvimtools/none-ls.nvim",
-        event = "VeryLazy",
-        dependencies = {
-
-        },
-        config = function ()
-            return require("config.null_ls") 
-        end,
-    },
     {
         "jay-babu/mason-null-ls.nvim",
         event = { "BufReadPre", "BufNewFile" },
