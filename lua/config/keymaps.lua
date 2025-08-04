@@ -276,11 +276,11 @@ mappings.telescope = {
 
 mappings.trouble = {
     {
-        desc = "Trouble toggle",
+        desc = "Trouble diagnostics",
         mode = "n",
         opts = { silent = true },
-        "<Leader>tt",
-        ":TroubleToggle<CR>",
+        "<Leader>td",
+        ":Trouble diagnostics<CR>",
     },
 }
 

@@ -1,6 +1,7 @@
 local options = {
     lsp = {
         automatic_installation = true,
+        automatic_enable = false,
         ensure_installed = {
             "bashls",
             "clangd",

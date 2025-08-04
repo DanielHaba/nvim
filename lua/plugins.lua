@@ -21,8 +21,6 @@ return {
             "RRethy/nvim-treesitter-textsubjects",
             "windwp/nvim-ts-autotag",
             "nvim-treesitter/playground",
-
-            "nushell/tree-sitter-nu",
         },
         opts = function()
             return require("config.treesitter")
@@ -86,6 +84,16 @@ return {
         },
         config = function()
             require("config.lsp")
+        end,
+    },
+    {
+        "nvimtools/none-ls.nvim",
+        event = "VeryLazy",
+        dependencies = {
+            "neovim/nvim-lspconfig",
+        },
+        config = function()
+            require("config.null_ls")
         end,
     },
 
@@ -153,16 +161,6 @@ return {
             return require("config.cmp")
         end,
     },
-    -- {
-    --     "andythigpen/nvim-coverage",
-    --     dependencies = {
-    --         "nvim-lua/plenary.nvim",
-    --     },
-    -- },
-    -- {
-    --     "klen/nvim-test",
-    --
-    -- },
 
     {
         "nvim-telescope/telescope.nvim",
@@ -406,13 +404,7 @@ return {
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
             "williamboman/mason.nvim",
-            {
-                "nvimtools/none-ls.nvim",
-                event = "VeryLazy",
-                config = function()
-                    require("config.null_ls")
-                end,
-            },
+            "nvimtools/none-ls.nvim",
         },
         opts = function()
             return require("config.mason").null_ls
@@ -429,20 +421,6 @@ return {
         end,
         opts = {},
     },
-
-    {
-        "LhKipp/nvim-nu",
-        event = "VeryLazy",
-        build = ":TSInstall nu",
-        dependencies = {
-            "nvim-treesitter/nvim-treesitter",
-            "nvimtools/none-ls.nvim",
-        },
-        opts = {
-            use_lsp_features = true,
-        },
-    },
-
     {
         "mbbill/undotree",
         cmd = {

@@ -2,7 +2,11 @@
 local lspconfig = require("lspconfig")
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 local on_attach = function(client, bufnr)
-
+    local keymaps = require("config.keymaps")
+    for _, keymap in ipairs({ "lsp", "dap" }) do
+        keymaps.setup(keymap, { buffer = bufnr })
+    end
+    require("virtualtypes").on_attach(client, bufnr)
     if type(vim.g.lsp_disable) == "table" then
         for _, disabled in ipairs(vim.g.lsp_disable) do
             if disabled == client.name then
@@ -11,9 +15,6 @@ local on_attach = function(client, bufnr)
             end
         end
     end
-
-    require("config.keymaps").setup("lsp", { buffer = bufnr })
-    require("virtualtypes").on_attach(client, bufnr)
 end
 
 capabilities.textDocument.completion.completionItem = {
@@ -47,10 +48,6 @@ lspconfig.omnisharp.setup({
     enable_import_completion = true,
 })
 
--- local codelldb = mason_registry.get_package("codelldb")
--- local codelldb_path = codelldb:get_install_path() .. "/extension/adapter/codelldb"
--- local liblldb_path = codelldb:get_install_path() .. "/extension/lldb/lib/liblldb.so"
-
 vim.g.rustaceanvim = {
     tools = {},
     server = {
@@ -60,45 +57,13 @@ vim.g.rustaceanvim = {
 }
 
 require("rustaceanvim")
--- require("rust-tools").setup({
---     server = {
---         on_attach = on_attach,
---         capabilities = capabilities,
---         settings = {
---             ["rust-analyzer"] = {
---                 -- rust-analyzer.completion.callable.snippets
---                 -- rust-analyzer.completion.fullFunctionSignatures.enable
---                 -- rust-analyzer.lens.references.adt.enable
---                 completion = {
---                     callable = {
---                         snippets = false,
---                     },
---                 },
---                 procMacro = {
---                     enable = true,
---                 },
---             },
---         },
---     },
---     tools = {
---         on_initialized = function ()
---             vim.lsp.codelens.refresh()
---         end,
---         float_win_config = {
---             borders = "none",
---         },
---     },
---     dap = {
---         adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
---     },
--- })
 
 require("go").setup({
     lsp_on_attach = on_attach,
     lsp_cfg = {
         capabilities = capabilities,
         settings = {
-            gopls =  {
+            gopls = {
                 buildFlags = { "-tags=acceptance" },
             },
         },
@@ -106,10 +71,7 @@ require("go").setup({
     lsp_keymaps = false,
 })
 
--- lspconfig.csharp_ls.setup({
---     on_attach = on_attach,
---     capabilites = capabilities,
--- })
+-- require("nu")
 
 lspconfig.lua_ls.setup({
     on_attach = on_attach,
@@ -163,13 +125,27 @@ lspconfig.pylsp.setup({
     on_attach = on_attach,
     capabilities = capabilities,
     settings = {
+        configurationSources = { "flake8" },
         pylsp = {
             plugins = {
+                pyflakes = {
+                    enabled = true,
+                },
                 pycodestyle = {
                     enabled = true,
                     ignore = { "E201", "E303", "E501" },
                     maxLineLength = 180,
                 },
+                -- flake8 = {
+                --     enabled = true,
+                --     ignore = { "E201", "E303", "E501" },
+                --     maxLineLength = 180,
+                -- },
+                -- pylint = {
+                --     enabled = true,
+                --     ignore = { "E201", "E303", "E501" },
+                --     maxLineLength = 180,
+                -- },
             },
         },
     },
@@ -201,7 +177,7 @@ lspconfig.clangd.setup({
     },
 })
 
-for _, server in ipairs({ "html", "ts_ls", "lemminx", "terraformls", "buf_ls", "sqlls" }) do
+for _, server in ipairs({ "html", "ts_ls", "lemminx", "terraformls", "buf_ls", "sqlls", "nushell" }) do
     lspconfig[server].setup({
         on_attach = on_attach,
         capabilities = capabilities,

@@ -9,16 +9,6 @@ parsers.gotmpl = {
     used_by = { "gohtmltmpl", "gotexttmpl", "gotmpl", "yaml" }
 }
 
--- parsers.nu = {
---     install_info = {
---         url = "https://github.com/nushell/tree-sitter-nu",
---         files = { "src/parser.c" },
---         branch = "main",
---     },
---     filetype = "nu",
--- }
-
-
 local options = {
     ensure_installed = {
         -- general
@@ -146,7 +136,9 @@ local selectors = {
     ["im"] = "@call.inner",
     ["ar"] = "@return.outer",
     ["ir"] = "@return.inner",
-    ["s"] = "@statement.outer",
+    ["s"] = "@statement.outer", 
+    ["aP"] = "@pipeline.outer",
+    ["iP"] = "@pipeline.inner",
 }
 
 for head, selector in pairs(selectors) do
