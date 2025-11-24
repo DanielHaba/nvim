@@ -1,4 +1,4 @@
-local options = {
+return {
     defaults = {
         vimgrep_arguments = {
             "rg",
@@ -38,8 +38,7 @@ local options = {
         generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
         path_display = { "truncate" },
         winblend = 0,
-        border = {},
-        borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+        -- borderchars = require("utils.borders").get_borderchars(),
         color_devicons = true,
         set_env = { ["COLORTERM"] = "truecolor" },
         file_previewer = require("telescope.previewers").vim_buffer_cat.new,
@@ -52,4 +51,4 @@ local options = {
     },
 }
 
-return options
+

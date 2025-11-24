@@ -505,5 +505,128 @@ hover.setup = function(config)
 end
 
 
-return hover;
+-- local blink_docs = require("blink.cmp.lib.window.docs")
+-- local blink_signature = require("blink.cmp.signature.window")
+-- -- local markview_actions = require("markview.actions")
+--
+--
+-- local prev_render = blink_docs.render_detail_and_documentation
+--
+-- blink_docs.render_detail_and_documentation = function(opts)
+--     if package.loaded["markview"] then
+--         local detail_lines = {}
+--         local details = type(opts.detail) == 'string' and { opts.detail } or opts.detail or {}
+--         --- @cast details string[]
+--         details = require('blink.cmp.lib.utils').deduplicate(details)
+--
+--         table.insert(detail_lines, "```" .. vim.bo.filetype)
+--         for _, v in ipairs(details) do
+--             -- for _, l in ipairs(blink_docs.split_lines(v)) do
+--             --     table.insert(detail_lines, l)
+--             -- end
+--             vim.list_extend(detail_lines, blink_docs.split_lines(v))
+--         end
+--         table.insert(detail_lines, "```")
+--
+--
+--         local doc_lines = {}
+--         if opts.documentation ~= nil then
+--             local doc = opts.documentation
+--             if type(opts.documentation) == 'string' then doc = { kind = 'plaintext', value = opts.documentation } end
+--             -- vim.lsp.util.convert_input_to_markdown_lines(doc, doc_lines)
+--
+--             vim.list_extend(doc_lines, blink_docs.split_lines(doc.value))
+--         end
+--
+--         ---@type string[]
+--         local combined_lines = vim.list_extend({}, detail_lines)
+--
+--         -- add a blank line for the --- separator
+--         local doc_already_has_separator = #doc_lines > 1 and (doc_lines[1] == '---' or doc_lines[1] == '***')
+--         if #detail_lines > 0 and #doc_lines > 0 then table.insert(combined_lines, '___') end
+--         -- skip original separator in doc_lines, so we can highlight it later
+--         vim.list_extend(combined_lines, doc_lines, doc_already_has_separator and 2 or 1)
+--
+--
+--         vim.bo[opts.bufnr].ft = "markdown"
+--         vim.api.nvim_buf_set_lines(opts.bufnr, 0, -1, false, combined_lines)
+--         -- vim.api.nvim_set_option_value('modified', false, { buf = opts.bufnr })
+--     else
+--         prev_render(opts)
+--     end
+-- end
+--
+-- blink_signature.open_with_signature_help = function(context, signature_help)
+--     local signature = blink_signature
+--     signature.context = context
+--     -- check if there are any signatures in signature_help, since
+--     -- convert_signature_help_to_markdown_lines errors with no signatures
+--     if
+--         signature_help == nil
+--         or #signature_help.signatures == 0
+--         or signature_help.signatures[(signature_help.activeSignature or 0) + 1] == nil
+--     then
+--         signature.win:close()
+--         return
+--     end
+--
+--     local active_signature = signature_help.signatures[(signature_help.activeSignature or 0) + 1]
+--
+--     local labels = vim.tbl_map(function(signature) return signature.label end, signature_help.signatures)
+--
+--     if signature.shown_signature ~= active_signature then
+--         require('blink.cmp.lib.window.docs').render_detail_and_documentation({
+--             bufnr = signature.win:get_buf(),
+--             detail = labels,
+--             documentation = config.show_documentation and active_signature.documentation or nil,
+--             max_width = config.max_width,
+--             use_treesitter_highlighting = config.treesitter_highlighting,
+--         })
+--     end
+--     signature.shown_signature = active_signature
+--
+--
+--     if package.loaded["markview"] then
+--         -- package.loaded["markview"].render(signature.win:get_buf(), {
+--         --     enabled = true,
+--         --     hybrid_mode = false,
+--         -- })
+--     else
+--         -- highlight active parameter
+--         local _, active_highlight = vim.lsp.util.convert_signature_help_to_markdown_lines(
+--             signature_help,
+--             vim.bo.filetype,
+--             sources.get_signature_help_trigger_characters().trigger_characters
+--         )
+--         if active_highlight ~= nil then
+--             -- TODO: nvim 0.11+ returns the start and end line which we should use
+--             local start_col = vim.fn.has('nvim-0.11.0') == 1 and active_highlight[2] or active_highlight[1]
+--             local end_col = vim.fn.has('nvim-0.11.0') == 1 and active_highlight[4] or active_highlight[2]
+--
+--             vim.api.nvim_buf_set_extmark(
+--                 signature.win:get_buf(),
+--                 require('blink.cmp.config').appearance.highlight_ns,
+--                 0,
+--                 start_col,
+--                 { end_col = end_col, hl_group = 'BlinkCmpSignatureHelpActiveParameter' }
+--             )
+--         end
+--     end
+--
+--     signature.win:open()
+--     signature.update_position()
+--     signature.scroll_up(1)
+--     package.loaded["markview"].render(signature.win:get_buf(), {
+--         enabled = true,
+--         hybrid_mode = false,
+--     })
+-- end
+--
+-- -- prev_render(opts)
+-- -- vim.bo[opts.bufnr].ft = "markdown"
+--
+-- -- opts.detail = vim.bo.filetype
+--
+-- -- renderer:render(opts.bufnr);
 
+return hover;

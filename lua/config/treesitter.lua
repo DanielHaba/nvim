@@ -1,29 +1,21 @@
-local parsers = require("nvim-treesitter.parsers").get_parser_configs()
-
-parsers.gotmpl = {
-    install_info = {
-        url = "https://github.com/ngalaiko/tree-sitter-go-template",
-        files = { "src/parser.c" },
-    },
-    filetype = "gotmpl",
-    used_by = { "gohtmltmpl", "gotexttmpl", "gotmpl", "yaml" }
-}
-
-local options = {
+return {
     ensure_installed = {
         -- general
         "vim",
+        "vimdoc",
         "markdown",
         "markdown_inline",
         "query",
         "regex",
+        "latex",
+        "typst",
         "sql",
         "graphql",
         "dockerfile",
         "proto",
         "nu",
-
         "comment",
+
         -- git
         "diff",
         "git_config",
@@ -72,85 +64,19 @@ local options = {
         "jsdoc",
 
     },
-    indent = {
-        enable = true,
-    },
-    highlight = {
-        enable = true,
-    },
-    incremental_selection = {
-        enable = true,
-        keymaps = {
-            init_selection = "<C-Space>",
-            node_incremental = "<C-Space>",
-            node_decremental = "<C-BS>",
-            scope_incremental = false,
-        },
-    },
     textobjects = {
-        move = {
-            enable = true,
-            set_jumps = true,
-            goto_next_start = {},
-            goto_next_end = {},
-            goto_previous_start = {},
-            goto_previous_end = {},
+        selectors = {
+            f = "@function",
+            t = "@class",
+            d = "@condition",
+            l = "@loop",
+            c = "@comment",
+            p = "@parameter",
+            e = "@block",
+            m = "@call",
+            r = "@return",
+            s = "@statement",
+            P = "@pipeline",
         },
-        select = {
-            enable = true,
-            lookahead = true,
-            keymaps = {},
-        },
-    },
-    textsubjects = {
-        enable = true,
-        prev_selection = "<C-BS>",
-        keymaps = {
-            ["<C-Space>"] = "textsubjects-smart",
-        },
-    },
-    autotag = {
-        enable = true,
-    },
-    playground = {
-        enable = true,
     },
 }
-
-local selectors = {
-    ["af"] = "@function.outer",
-    ["if"] = "@function.inner",
-    ["at"] = "@class.outer",
-    ["it"] = "@class.inner",
-    ["ad"] = "@condition.outer",
-    ["id"] = "@condition.inner",
-    ["al"] = "@loop.outer",
-    ["il"] = "@loop.inner",
-    ["ac"] = "@comment.outer",
-    ["ic"] = "@comment.inner",
-    ["ap"] = "@parameter.outer",
-    ["ip"] = "@parameter.inner",
-    ["ae"] = "@block.outer",
-    ["ie"] = "@block.inner",
-    ["am"] = "@call.outer",
-    ["im"] = "@call.inner",
-    ["ar"] = "@return.outer",
-    ["ir"] = "@return.inner",
-    ["s"] = "@statement.outer", 
-    ["aP"] = "@pipeline.outer",
-    ["iP"] = "@pipeline.inner",
-}
-
-for head, selector in pairs(selectors) do
-    local move = options.textobjects.move
-    local select = options.textobjects.select.keymaps
-    local tail = head:gsub("%l$", string.upper)
-
-    move.goto_next_start["]" .. head] = selector
-    move.goto_next_end["]" .. tail] = selector
-    move.goto_previous_start["[" .. head] = selector
-    move.goto_previous_end["[" .. tail] = selector
-    select[head] = selector
-end
-
-return options

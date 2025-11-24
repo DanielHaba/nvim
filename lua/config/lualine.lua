@@ -1,6 +1,5 @@
-local options = {
+return {
     options = {
-        theme = "themer",
         disabled_filetypes = {
             "neo-tree",
             "Trouble",
@@ -13,5 +12,3 @@ local options = {
         },
     },
 }
-
-return options

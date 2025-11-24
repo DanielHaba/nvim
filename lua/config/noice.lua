@@ -1,4 +1,4 @@
-local options = {
+return {
     cmdline = {
         enabled = true,
         backend = "cmdline_popup"
@@ -14,13 +14,21 @@ local options = {
         enabled = false,
     },
     notify = {
+        enabled = true,
         merge = true,
+        view = "notify",
     },
     lsp = {
         override = {
-            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-            ["vim.lsp.util.stylize_markdown"] = true,
-            -- ["cmp.entry.get_documentation"] = true,
+            ["vim.lsp.util.convert_input_to_markdown_lines"] = false,
+            ["vim.lsp.util.stylize_markdown"] = false,
+            ["cmp.entry.get_documentation"] = false,
+        },
+        hover = {
+            enabled = false,
+        },
+        signature = {
+            enabled = false,
         },
     },
     presets = {
@@ -28,14 +36,22 @@ local options = {
         command_palette = true,
     },
     views = {
-        cmdline_popup = {
-            border = {
-                style = "none",
-                padding = { 1, 1 },
+        -- cmdline_popup = {
+        --     filter_options = {},
+        --     win_options = {
+        --         -- winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorderFlat",
+        --     },
+        -- },
+        popup = {
+            size = {
+                width = "80%",
+                height = "60%",
             },
-            filter_options = {},
-            win_options = {
-                winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorderFlat",
+        },
+        popupmenu = {
+            size = {
+                width = "80%",
+                height = "60%",
             },
         },
     },
@@ -80,4 +96,3 @@ local options = {
     },
 }
 
-return options

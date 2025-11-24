@@ -1,7 +1,12 @@
 vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-vim.g.colorscheme = "catppuccin_latte"
-vim.g.shell = "/home/daniel/.cargo/bin/nu"
+vim.g.maplocalleader = "\\"
+vim.g.colorscheme = "catppuccin-latte"
+vim.g.shell = os.getenv("HOME") .. "/.cargo/bin/nu"
+vim.g.foldlevelstart = 99
+-- vim.g.winborder = "bold"
+-- vim.g.winborder = "▛,▀,▜,▐,▟,▄,▙,▌"
+
+-- vim.g.winborder = "▛,▀,▜,▐,▟,▄,▙,▌"
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
@@ -26,3 +31,9 @@ vim.opt.mouse=""
 vim.opt.exrc = true
 vim.opt.secure = true
 
+-- vim.opt.winborder = "▛,▀,▜,▐,▟,▄,▙,▌"
+-- vim.opt.winborder = "solid"
+-- vim.opt.winborder = "12345678"
+-- vim.o.winborder='+,-,+,|,+,-,+,|'
+vim.o.winborder = "none"
+vim.g.catppuccin_debug = true
