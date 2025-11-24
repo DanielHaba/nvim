@@ -180,6 +180,7 @@ local function neovim(colors)
 
     return { {
         Normal = { bg = "NONE" },
+        NormalNC = { bg = "NONE" },
         NormalFloat = win:normal(),
         FloatBorder = win:border(),
         FloatTitle = win:title(),
