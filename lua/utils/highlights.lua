@@ -175,10 +175,11 @@ local function notify(variant)
     return notify_foreground
 end
 
-local function float(colors)
+local function neovim(colors)
     local win = window.new(colors.text, colors.crust, colors.blue)
 
     return { {
+        Normal = { bg = "NONE" },
         NormalFloat = win:normal(),
         FloatBorder = win:border(),
         FloatTitle = win:title(),
@@ -250,9 +251,9 @@ local function blink(colors)
 end
 
 M.all = compose({
+    neovim,
     telescope,
     notify("background"),
-    float,
     noice,
     blink,
 })
