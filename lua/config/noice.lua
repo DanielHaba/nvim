@@ -36,12 +36,12 @@ return {
         command_palette = true,
     },
     views = {
-        -- cmdline_popup = {
-        --     filter_options = {},
-        --     win_options = {
-        --         -- winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorderFlat",
-        --     },
-        -- },
+        cmdline_popup = {
+            filter_options = {},
+            win_options = {
+                -- winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorderFlat",
+            },
+        },
         popup = {
             size = {
                 width = "80%",

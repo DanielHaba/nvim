@@ -64,39 +64,77 @@ return {
             "<Cmd>bd!<CR>",
         },
         {
-            desc = "Move to left window",
+            desc = "Undo tree",
+            mode = { "n" },
+            opts = { silent = true },
+            "<Leader>u",
+            "<Cmd>UndotreeToggle<CR>",
+        },
+        ----------------------------------------- FOCUS WINDOW -------------------------------------------
+        {
+            desc = "Focus left",
             mode = { "n", "t" },
             opts = { silent = true },
             "<C-h>",
             "<C-w>h",
         },
         {
-            desc = "Split to left",
-            mode = { "n", "t" },
-            opts = { silent = true },
-            "<Leader>sh",
-            "<Cmd>set nosplitright<CR><Cmd>vsplit<CR>",
-        },
-        {
-            desc = "Move to right window",
+            desc = "Focus right",
             mode = { "n", "t" },
             opts = { silent = true },
             "<C-l>",
             "<C-w>l",
         },
         {
-            desc = "Split to right",
-            mode = { "n", "t" },
-            opts = { silent = true },
-            "<Leader>sl",
-            "<Cmd>set splitright<CR><Cmd>vsplit<CR>",
-        },
-        {
-            desc = "Move to down window",
+            desc = "Focus down",
             mode = { "n", "t" },
             opts = { silent = true },
             "<C-j>",
             "<C-w>j",
+        },
+        {
+            desc = "Focus up",
+            mode = { "n", "t" },
+            opts = { silent = true },
+            "<C-k>",
+            "<C-w>k",
+        },
+        ----------------------------------------- RESIZE WINDOW -------------------------------------------
+        {
+            desc = "Shrink horizontal",
+            mode = { "n", "t" },
+            opts = { silent = true, expr = true, replace_keycodes = false },
+            "<C-Left>",
+            '"<Cmd>vertical resize -" . v:count1 ."<CR>"',
+        },
+        {
+            desc = "Grow horizontal",
+            mode = { "n", "t" },
+            opts = { silent = true, expr = true, replace_keycodes = false },
+            "<C-Right>",
+            '"<Cmd>vertical resize +" . v:count1 ."<CR>"',
+        },
+        {
+            desc = "Shrink vertical",
+            mode = { "n", "t" },
+            opts = { silent = true, expr = true, replace_keycodes = false },
+            "<C-Down>",
+            '"<Cmd>resize -" . v:count1 ."<CR>"',
+        },
+        {
+            desc = "Grow vertical",
+            mode = { "n", "t" },
+            opts = { silent = true, expr = true, replace_keycodes = false },
+            "<C-Up>",
+            '"<Cmd>resize +" . v:count1 ."<CR>"',
+        },
+        ----------------------------------------- SPLITS -------------------------------------------
+        {
+            desc = "Split to up",
+            mode = { "n", "t" },
+            opts = { silent = true },
+            "<Leader>sk",
+            "<Cmd>set nosplitbelow<CR><Cmd>split<CR>",
         },
         {
             desc = "Split to down",
@@ -106,33 +144,21 @@ return {
             "<Cmd>set splitbelow<CR><Cmd>split<CR>",
         },
         {
-            desc = "Move to up window",
+            desc = "Split to left",
             mode = { "n", "t" },
             opts = { silent = true },
-            "<C-k>",
-            "<C-w>k",
+            "<Leader>sh",
+            "<Cmd>set nosplitright<CR><Cmd>vsplit<CR>",
         },
         {
-            desc = "Split to up",
+            desc = "Split to right",
             mode = { "n", "t" },
             opts = { silent = true },
-            "<Leader>sk",
-            "<Cmd>set nosplitbelow<CR><Cmd>split<CR>",
+            "<Leader>sl",
+            "<Cmd>set splitright<CR><Cmd>vsplit<CR>",
         },
-        {
-            desc = "Undo tree",
-            mode = { "n" },
-            opts = { silent = true },
-            "<Leader>u",
-            "<Cmd>UndotreeToggle<CR>",
-        },
-        -- {
-        --     desc = "Sudo save",
-        --     mode = { "c" },
-        --     opts = { remap = false },
-        --     "w!",
-        --     "<Cmd>w !sudo tee %<CR>",
-        -- }
+
+
     },
 
     lsp = {
@@ -243,11 +269,32 @@ return {
             "<Cmd>Telescope buffers<CR>",
         },
         {
+            desc = "Resume",
+            mode = "n",
+            opts = { silent = true },
+            "<Leader>fr",
+            "<Cmd>Telescope resume<CR>",
+        },
+        {
             desc = "Noice",
             mode = "n",
             opts = { silent = true },
             "<Leader>fn",
             "<Cmd>Noice telescope<CR>",
+        },
+        {
+            desc = "Search tags",
+            mode = "n",
+            opts = { silent = true },
+            "<Leader>fot",
+            "<Cmd>Noice orgmode search_tags",
+        },
+        {
+            desc = "Search headings",
+            mode = "n",
+            opts = { silent = true },
+            "<Leader>foh",
+            "<Cmd>Noice orgmode search_headings",
         },
     },
 
@@ -333,7 +380,10 @@ return {
             mode = "n",
             "<Leader>?",
             function()
-                require("which-key").show({ global = false })
+                require("which-key").show({ 
+                    global = true, 
+                    loop = true,
+                })
             end,
         },
     },
@@ -395,13 +445,13 @@ return {
             mode = "n",
             desc = "Harpoon add",
             "<Leader>a",
-            function () require("harpoon"):list():add() end,
+            function() require("harpoon"):list():add() end,
         },
         {
             mode = "n",
             desc = "Harpoon quick menu",
             "<C-e>",
-            function () 
+            function()
                 local harpoon = require("harpoon")
                 harpoon.ui:toggle_quick_menu(harpoon:list())
             end,
@@ -410,75 +460,108 @@ return {
             mode = "n",
             desc = "Harpoon next",
             "<C-[>",
-            function () require("harpoon"):list():prev() end,
+            function() require("harpoon"):list():prev() end,
         },
         {
             mode = "n",
             desc = "Harpoon previous",
             "<C-]>",
-            function () require("harpoon"):list():next() end,
+            function() require("harpoon"):list():next() end,
         },
-        
+
         {
             mode = "n",
             desc = "Harpoon jump 1",
             "<C-1>",
-            function () require("harpoon"):list():select(1) end,
+            function() require("harpoon"):list():select(1) end,
         },
         {
             mode = "n",
             desc = "Harpoon jump 2",
             "<C-2>",
-            function () require("harpoon"):list():select(2) end,
+            function() require("harpoon"):list():select(2) end,
         },
         {
             mode = "n",
             desc = "Harpoon jump 3",
             "<C-3>",
-            function () require("harpoon"):list():select(3) end,
+            function() require("harpoon"):list():select(3) end,
         },
         {
             mode = "n",
             desc = "Harpoon jump 4",
             "<C-4>",
-            function () require("harpoon"):list():select(4) end,
+            function() require("harpoon"):list():select(4) end,
         },
         {
             mode = "n",
             desc = "Harpoon jump 5",
             "<C-5>",
-            function () require("harpoon"):list():select(5) end,
+            function() require("harpoon"):list():select(5) end,
         },
         {
             mode = "n",
             desc = "Harpoon jump 6",
             "<C-6>",
-            function () require("harpoon"):list():select(6) end,
+            function() require("harpoon"):list():select(6) end,
         },
         {
             mode = "n",
             desc = "Harpoon jump 7",
             "<C-7>",
-            function () require("harpoon"):list():select(7) end,
+            function() require("harpoon"):list():select(7) end,
         },
         {
             mode = "n",
             desc = "Harpoon jump 8",
             "<C-8>",
-            function () require("harpoon"):list():select(8) end,
+            function() require("harpoon"):list():select(8) end,
         },
         {
             mode = "n",
             desc = "Harpoon jump 9",
             "<C-9>",
-            function () require("harpoon"):list():select(9) end,
+            function() require("harpoon"):list():select(9) end,
         },
         {
             mode = "n",
             desc = "Harpoon jump 10",
             "<C-0>",
-            function () require("harpoon"):list():select(10) end,
+            function() require("harpoon"):list():select(10) end,
         },
     },
 
+    overseer = {
+        {
+            mode = "n",
+            desc = "Overseer run",
+            "<Leader>er",
+            "<Cmd>OverseerRun<CR>",
+        },
+        {
+            mode = "n",
+            desc = "Overseer Toggle",
+            "<Leader>eo",
+            "<Cmd>OverseerToggle<CR>",
+        },
+        {
+            mode = "n",
+            desc = "Overseer Tasks",
+            "<Leader>et",
+            "<Cmd>OverseerTaskAction<CR>",
+        },
+    },
+
+    orgmode = {
+        filetypes = { "org" },
+        {
+            mode = "i",
+            desc = "Meta return",
+            opts = { silent = true },
+            "<S-CR>",
+            function()
+                require("orgmode").action("org_mappings.meta_return")
+            end,
+        },
+    },
 }

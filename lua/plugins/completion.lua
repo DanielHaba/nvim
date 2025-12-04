@@ -7,6 +7,7 @@ return {
             { "neovim/nvim-lspconfig" },
             { "onsails/lspkind.nvim" },
             { "xzbdmw/colorful-menu.nvim" },
+            { "folke/noice.nvim" },
         },
         opts = function()
             return require("config.blink")

@@ -1,52 +1,9 @@
 return {
     {
-        "catppuccin/nvim",
-        name = "catppuccin",
-        lazy = false,
-        priority = 1000,
-        opts = function()
-            return {
-                flavour = "latte",
-                auto_integrations = true,
-                -- transparent_background = true,
-                float = {
-                    solid = false,
-                    transparent = false,
-                },
-                dim_inactive = {
-                    enabled = false,
-                },
-                highlight_overrides = require("utils.highlights"),
-            }
-        end,
-        config = function(_, opts)
-            require("catppuccin").setup(opts)
-            vim.cmd.colorscheme "catppuccin"
-        end,
-    },
-    {
-        "mikesmithgh/borderline.nvim",
-        event = "VeryLazy",
-        opts = function()
-            return {
-                enabled = true,
-                border = require("borderline.borders").solid,
-                -- border = require("borderline.borders").block,
-            }
-        end,
-    },
-    {
-        "nvim-lualine/lualine.nvim",
-        event = "VeryLazy",
-        opts = function()
-            return require("config.lualine")
-        end,
-    },
-    {
         "OXY2DEV/helpview.nvim",
-        lazy = false,
+        event = "VeryLazy",
         dependencies = {
-            { "catppuccin/nvim" },
+            { "theme" },
             { "folke/noice.nvim" },
         },
         opts = {
@@ -55,13 +12,13 @@ return {
     },
     {
         "OXY2DEV/markview.nvim",
+        event = "VeryLazy",
         dependencies = {
-            { "catppuccin/nvim" },
+            { "theme" },
             { "folke/noice.nvim" },
             { "neovim/nvim-lspconfig" },
             { "saghen/blink.cmp" },
         },
-        lazy = false,
         init = function()
             vim.g.markview_blink_loaded = true
         end,
@@ -105,20 +62,39 @@ return {
         end,
     },
     {
-        "stevearc/dressing.nvim",
-        lazy = true,
+        "nvim-orgmode/orgmode",
+        event = "VeryLazy",
+        ft = { "org" },
         dependencies = {
-            "MunifTanjim/nui.nvim",
+            { "theme" },
+            { "michaelb/sniprun" },
+            { "nvim-orgmode/telescope-orgmode.nvim" },
+            { "akinsho/org-bullets.nvim" },
         },
-        opts = function ()
-            return require("config.dressing")
-        end
+        opts = function()
+            return require("config.orgmode")
+        end,
     },
-    -- {
-    --     "xiyaowong/transparent.nvim",
-    --     lazy = false,
-    --     opts = {},
-    -- },
-    { "rasulomaroff/reactive.nvim" },
-    { "rktjmp/lush.nvim" },
+    {
+        "michaelb/sniprun",
+        build = "sh install.sh",
+        cmd = { 
+            "SnipRun",
+            "SnipLive",
+            "SnipInfo",
+            "SnipReset",
+            "SnipReplMemoryClean",
+            "SnipClose",
+
+        },
+    },
+    {
+        "nvim-orgmode/telescope-orgmode.nvim",
+        dependencies = {
+            { 
+                "nvim-telescope/telescope.nvim",
+                opts = { load_extensions = { "orgmode" } },
+            },
+        },
+    },
 }

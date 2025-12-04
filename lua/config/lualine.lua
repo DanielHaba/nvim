@@ -1,5 +1,6 @@
 return {
     options = {
+        theme = vim.g.lualine_theme,
         disabled_filetypes = {
             "neo-tree",
             "Trouble",

@@ -1,16 +1,55 @@
 require("config.vim")
-local keymaps = require("config.keymaps")
 
+return {
+    {
+        "keymaps",
+        dev = true,
+        event = "VimEnter",
+        opts = function()
+            return require("config.keymaps")
+        end,
+    },
+    {
+        "theme",
+        dev = true,
+        event = "VeryLazy",
+        dependencies = {
+            { "backdrop" },
+            { "focus" },
+        },
+        opts = {},
+    },
+    {
+        "backdrop",
+        dev = true,
+        opts = {
+            filetypes = {
+                "NoicePopupMenu",
+                "NoicePopup",
+                "NoiceCmdline",
+                "NoiceCmdlinePopupMenu",
+                "NoiceCmdlineInput",
+                "NoiceCmdlineOutput",
+                "NoiceCmdlinePopup",
+                "NoiceSplit",
+                "NoiceVSplit",
+                "NoiceMessages",
+                "NoiceNotify",
+                "NoiceConfirm",
+                "NoiceMini",
+                "NoiceHover",
+            },
+        },
+    },
+    {
 
-for _, section in pairs(keymaps) do
-    for _, keymap in ipairs(section) do
-        local mode = keymap.mode or "n"
-        local o = vim.tbl_extend("force", keymap.opts or {}, {
-            desc = keymap.desc
-        })
-        vim.keymap.set(mode, keymap[1], keymap[2], o)
-
-    end
-end
-
-return {}
+        "focus",
+        dev = true,
+        opts = {
+            ignored = {
+                "notify",
+                "NoiceNotify",
+            },
+        },
+    },
+}

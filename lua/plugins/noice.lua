@@ -8,14 +8,6 @@ return {
             "nvim-treesitter/nvim-treesitter",
             "rcarriga/nvim-notify",
         },
-        init = function()
-            require("utils.backdrop").create({
-                "NoicePopup", "NoicePopupMenu",
-                "NoiceCmdline", "NoiceCmdlinePopupmenu",
-                "NoiceCmdlineInput", "NoiceCmdlineOutput",
-                "NoiceCmdlinePopup", "NoiceSplit", "NoiceVSplit",
-            }, { z_index = 50 })
-        end,
         opts = function()
             return vim.tbl_deep_extend("force", require("config.noice"), {
                 views = {
@@ -100,6 +92,16 @@ return {
     },
     {
         "rcarriga/nvim-notify",
+        dependencies = {
+            {
+                "nvim-telescope/telescope.nvim",
+                opts = {
+                    load_extensions = {
+                        notify = true,
+                    },
+                },
+            },
+        },
         opts = {
             render = "wrapped-compact",
         },

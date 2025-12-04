@@ -55,6 +55,7 @@ return {
         "python",
 
         -- web
+        "http",
         "html",
         "css",
         "scss",

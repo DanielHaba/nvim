@@ -1,4 +1,3 @@
-vim.api.nvim_set_hl(0, "Backdrop", { bg = "#000000", default = true })
 
 
 ---@class Backdrop
@@ -25,6 +24,7 @@ function Backdrop:create(zindex)
         vim.bo[self.buf].buftype = "nofile"
     end
     if self.win == nil then
+        if zindex < 1 then zindex = 1 end
         self.win = vim.api.nvim_open_win(self.buf, false, {
             noautocmd = true,
             relative = "editor",
@@ -35,7 +35,7 @@ function Backdrop:create(zindex)
             height = vim.o.lines,
             focusable = false,
             style = "minimal",
-            zindex = math.min(zindex - 1, 0),
+            zindex = zindex - 1,
             hide = false,
         })
         vim.wo[self.win].winhighlight = "Normal:Backdrop"
@@ -99,7 +99,6 @@ function Backdrop.clean()
         if not dirty then
             return
         end
-        -- vim.print("cleaning up backdrops")
         ---@type table<Backdrop>
         local kept_backdrops = {}
         for _, win in ipairs(vim.api.nvim_list_wins()) do
@@ -122,12 +121,14 @@ end
 local M = {}
 
 function M.setup(opts)
+    vim.api.nvim_set_hl(0, "Backdrop", { bg = "#000000", default = true })
     local opts = opts or {} 
     local group = vim.api.nvim_create_augroup("backdrop", {})
 
     vim.api.nvim_create_autocmd(
         { "WinNew", "WinEnter", "WinLeave", "WinClosed" },
         {
+            group = group,
             callback = function ()
                 Backdrop.clean()
             end
@@ -136,6 +137,7 @@ function M.setup(opts)
     vim.api.nvim_create_autocmd(
         { "WinEnter" },
         {
+            group = group,
             callback = function ()
                 local win = vim.api.nvim_get_current_win()
                 local opts = vim.api.nvim_win_get_config(win)

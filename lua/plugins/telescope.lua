@@ -7,11 +7,8 @@ return {
         dependencies = {
             { "nvim-lua/plenary.nvim" },
             { "BurntSushi/ripgrep" },
-            { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' }
+            { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
         },
-        init = function()
-            require("utils.backdrop").create("TelescopePrompt")
-        end,
         opts = function()
             return require("config.telescope")
         end,

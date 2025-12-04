@@ -9,6 +9,7 @@ return {
                 },
                 opts = {},
             },
+            { "folke/lazydev.nvim" },
         },
         opts = function()
             return require("config.lsp")
@@ -34,9 +35,35 @@ return {
     {
         "nvimtools/none-ls.nvim",
         dependencies = {
-            "neovim/nvim-lspconfig",
+            { "neovim/nvim-lspconfig" },
+            { "nvimtools/none-ls-extras.nvim" },
         },
+        opts = function ()
+            return require("config.none_ls")
+        end,
+    },
+    {
+        'VidocqH/lsp-lens.nvim',
+        event = "VeryLazy",
+        dependencies = {
+            { "neovim/nvim-lspconfig" },
+        },
+        cmd = { "LspLensOn", "LspLensOff", "LspLensToggle" },
+        opts = { enable = true },
+    },
+    {
+        "folke/lazydev.nvim",
+        ft = "lua",
+        opts = {
+            library = {
+                { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+                "lazy.nvim",
+            },
+        },
+    },
+    {
+        "folke/trouble.nvim",
+        cmd = "Trouble",
         opts = {},
     },
-
 }

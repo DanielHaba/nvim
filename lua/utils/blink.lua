@@ -72,7 +72,7 @@ function M.menu_components.kind_icon.text(ctx)
 end
 
 function M.menu_components.kind_icon.highlight(ctx)
-    return "BlinkCmpKind" .. ctx.kind
+    return {{ group = "BlinkCmpKind" .. ctx.kind, priority = 20000 }}
 end
 
 

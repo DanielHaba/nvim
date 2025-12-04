@@ -1,6 +1,5 @@
 require("config.vim")
 
-
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable",
@@ -16,6 +15,12 @@ require("lazy").setup({
     defaults = {
         lazy = true,
         version = "*",
+    },
+    dev = {
+        path = vim.fs.joinpath(vim.fn.stdpath("config"), "plugins"),
+    },
+    rocks = {
+        hererocks = true,
     },
     install = { colorscheme = { vim.g.colorscheme } },
     checker = { enabled = true },
