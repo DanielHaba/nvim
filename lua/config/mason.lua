@@ -21,7 +21,8 @@ return {
         "lemminx",
         "yamlls",
         "pylsp",
-        "tofu_ls",
+        -- "tofu_ls",
+        "terraformls",
         "buf_ls",
     },
     dap = {

@@ -81,7 +81,7 @@ return {
         default = { "lsp", "snippets" },
 
         per_filetype = {
-            lua = { "lazydev", "lsp", "path", "snippets", "buffer" },
+            lua = { "lsp", "path", "snippets", "buffer" },
             org = { "orgmode" },
         },
 

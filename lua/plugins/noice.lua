@@ -1,6 +1,8 @@
 return {
     {
         enabled = true,
+        -- version = "*",
+        branch = "main",
         "folke/noice.nvim",
         lazy = false,
         dependencies = {
@@ -74,7 +76,7 @@ return {
                     mini = {
                         -- border = { style = vim.g.winborder },
                         buf_options = { filetype = "NoiceMini" },
-                        -- zindex = 50,
+                        zindex = 1,
                     },
                     hover = {
                         -- border = { style = vim.g.winborder },
@@ -102,8 +104,8 @@ return {
                 },
             },
         },
-        opts = {
-            render = "wrapped-compact",
-        },
+        opts = function ()
+            return require("config.notify")
+        end,
     },
 }

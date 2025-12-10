@@ -17,7 +17,7 @@ require("lazy").setup({
         version = "*",
     },
     dev = {
-        path = vim.fs.joinpath(vim.fn.stdpath("config"), "plugins"),
+        path = vim.fs.joinpath(vim.fn.stdpath("config"), "modules"),
     },
     rocks = {
         hererocks = true,
@@ -26,6 +26,10 @@ require("lazy").setup({
     checker = { enabled = true },
     performance = {
         rtp = {
+            paths = vim.fn.split(
+                 vim.fn.globpath(vim.fn.stdpath("config"), "modules/*/lua"),
+                "\n"
+            ),
             disabled_plugins = {
                 "2html_plugin",
                 "tohtml",

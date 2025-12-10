@@ -282,20 +282,6 @@ return {
             "<Leader>fn",
             "<Cmd>Noice telescope<CR>",
         },
-        {
-            desc = "Search tags",
-            mode = "n",
-            opts = { silent = true },
-            "<Leader>fot",
-            "<Cmd>Noice orgmode search_tags",
-        },
-        {
-            desc = "Search headings",
-            mode = "n",
-            opts = { silent = true },
-            "<Leader>foh",
-            "<Cmd>Noice orgmode search_headings",
-        },
     },
 
     noice = {
@@ -535,33 +521,20 @@ return {
         {
             mode = "n",
             desc = "Overseer run",
-            "<Leader>er",
+            "<Leader>or",
             "<Cmd>OverseerRun<CR>",
         },
         {
             mode = "n",
             desc = "Overseer Toggle",
-            "<Leader>eo",
+            "<Leader>oo",
             "<Cmd>OverseerToggle<CR>",
         },
         {
             mode = "n",
             desc = "Overseer Tasks",
-            "<Leader>et",
+            "<Leader>ot",
             "<Cmd>OverseerTaskAction<CR>",
-        },
-    },
-
-    orgmode = {
-        filetypes = { "org" },
-        {
-            mode = "i",
-            desc = "Meta return",
-            opts = { silent = true },
-            "<S-CR>",
-            function()
-                require("orgmode").action("org_mappings.meta_return")
-            end,
         },
     },
 }

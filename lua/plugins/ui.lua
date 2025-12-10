@@ -5,7 +5,7 @@ return {
     --     opts = function()
     --         return {
     --             enabled = true,
-    --             border = require("borderline.borders").solid,
+    --             border = require("utils.border").block_inner,
     --         }
     --     end,
     -- },

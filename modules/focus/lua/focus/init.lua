@@ -8,21 +8,25 @@ local last_win = nil
 
 ---@param win integer
 local on_switch = vim.schedule_wrap(function (win)
-    if win == last_win then
+    if win == last_win or not vim.api.nvim_win_is_valid(win) then
         return
     end
     local opts = vim.api.nvim_win_get_config(win)
+    if opts.relative ~= "" then
+        last_win = win
+        return
+    end
     local a_win = win
     local a_zindex = opts.zindex or 0
 
     for _, c_win in ipairs(vim.api.nvim_list_wins()) do
-        local opts = vim.api.nvim_win_get_config(c_win)
-        local c_zindex = opts.zindex or 0
+        local c_opts = vim.api.nvim_win_get_config(c_win)
+        local c_zindex = c_opts.zindex or 0
         local c_buf = vim.api.nvim_win_get_buf(c_win)
 
         local is_valid = (
-            opts.relative == ""
-            and opts.focusable
+            c_opts.relative ~= ""
+            and c_opts.focusable
             and not vim.tbl_contains(M.ignored, vim.bo[c_buf].filetype)
         )
         if is_valid and c_zindex > a_zindex then

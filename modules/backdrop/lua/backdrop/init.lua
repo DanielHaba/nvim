@@ -85,7 +85,7 @@ function Backdrop.free(win)
     if backdrops[win] ~= nil then
         backdrops[win].refs = backdrops[win].refs - 1
         vim.schedule(function ()
-            if backdrops[win].refs <= 0 then
+            if backdrops[win] and backdrops[win].refs <= 0 then
                 Backdrop.close(win)
             end
         end)

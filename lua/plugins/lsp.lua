@@ -9,7 +9,7 @@ return {
                 },
                 opts = {},
             },
-            { "folke/lazydev.nvim" },
+            -- { "folke/lazydev.nvim" },
         },
         opts = function()
             return require("config.lsp")
@@ -29,6 +29,7 @@ return {
             })
             for lang, config in pairs(opts) do
                 vim.lsp.config(lang, config)
+                vim.lsp.enable(lang)
             end
         end,
     },
@@ -52,18 +53,18 @@ return {
         opts = { enable = true },
     },
     {
-        "folke/lazydev.nvim",
-        ft = "lua",
-        opts = {
-            library = {
-                { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-                "lazy.nvim",
-            },
-        },
-    },
-    {
         "folke/trouble.nvim",
         cmd = "Trouble",
         opts = {},
+    },
+    {
+        "folke/lazydev.nvim",
+        ft = "lua",
+        opts = {
+            library = vim.fn.split(
+                 vim.fn.globpath(vim.fn.stdpath("config"), "modules/*/lua"),
+                "\n"
+            ),
+        },
     },
 }
