@@ -8,6 +8,7 @@ return {
         opts = {},
     },
     {
+        enabled = false,
         "rest-nvim/rest.nvim",
         dependencies = {
             { 
