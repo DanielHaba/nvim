@@ -8,7 +8,7 @@ return {
 		notify = true,
 	},
 	statuscolumn = {
-		enabled = true,
+		enabled = false,
 		left = { "git" },
 	       right = { "sign" },
 	       folds = { open = false, git_hl = true },

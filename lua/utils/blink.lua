@@ -1,5 +1,4 @@
 --- @module "blink.cmp.config.completion.documentation"
-local markview = require("markview")
 
 local split_lines = require("blink.cmp.lib.window.docs").split_lines
 local buffer = nil
@@ -11,18 +10,19 @@ local M = {
     },
 }
 
-vim.api.nvim_create_autocmd("WinResized", {
-    callback = function(ctx)
-        local renderer = markview.strict_render
-        if ctx.buf == buffer then
-            renderer:clear(buffer)
-            renderer:render(buffer)
-        end
-    end,
-})
+-- vim.api.nvim_create_autocmd("WinResized", {
+--     callback = function(ctx)
+--         local renderer = markview.strict_render
+--         if ctx.buf == buffer then
+--             renderer:clear(buffer)
+--             renderer:render(buffer)
+--         end
+--     end,
+-- })
 
 ---@param opts blink.cmp.CompletionDocumentationDrawOpts
 function M.draw_documentation(opts)
+    local markview = require("markview")
     -- vim.print(opts)
     local renderer = markview.strict_render
     local item = opts.item

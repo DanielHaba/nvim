@@ -58,7 +58,7 @@ return {
         },
         documentation = {
             auto_show = true,
-            draw = require("utils.blink").draw_documentation,
+            -- draw = require("utils.blink").draw_documentation,
             window = {
                 border = "solid",
             },

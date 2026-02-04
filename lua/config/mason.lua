@@ -28,6 +28,7 @@ return {
     dap = {
         "codelldb",
         "js-debug-adapter",
+        "go-debug-adapter",
         "delve",
     },
     null_ls = {},

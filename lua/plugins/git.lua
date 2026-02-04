@@ -27,6 +27,7 @@ return {
         end,
     },
     {
+        enabled = false,
         "lewis6991/gitsigns.nvim",
         event = "VeryLazy",
         opts = {

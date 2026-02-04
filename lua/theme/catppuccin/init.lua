@@ -820,7 +820,7 @@ local editor = lush(function(injected_functions)
         MarkviewBlockQuoteWarn { MarkviewBlockQuoteDefault, fg = DiagnosticWarn.fg },
         MarkviewBlockQuoteSpecial { MarkviewBlockQuoteDefault, fg = Special.fg },
         MarkviewHyperlink = { sym "@markup.link.url" },
-        MarkviewCode { bg = mantle },
+        MarkviewCode { bg = mantle, gui = "nocombine" },
         MarkviewCodeFg { fg = MarkviewCode.bg },
         MarkviewCodeInfo { MarkviewCode, fg = surface2 },
         MarkviewInlineCode { bg = surface0 },
