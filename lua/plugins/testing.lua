@@ -1,6 +1,16 @@
 return {
     {
         "nvim-neotest/neotest",
+        cmd = {
+            "Neotest",
+            "NeotestRun",
+            "NeotestSummary",
+            "NeotestOutput",
+            "NeotestOutputPanel",
+            "NeotestStop",
+            "NeotestAttach",
+            "NeotestJump",
+        },
         dependencies = {
             { "nvim-neotest/nvim-nio" },
             { "nvim-lua/plenary.nvim" },

@@ -11,7 +11,7 @@ return {
     {
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v3.x",
-        lazy = false,
+        lazy = true,  -- Ładuj tylko na żądanie
         cmd = {"Neotree"},
         dependencies = {
             "nvim-lua/plenary.nvim",
@@ -28,5 +28,16 @@ return {
             end
             require("neo-tree").setup(opts)
         end
+    },
+    {
+        "aserowy/tmux.nvim",
+        cond = function() return vim.env.TMUX ~= nil end,
+        event = "VeryLazy",
+        opts = {
+            copy_sync = { enable = true },
+            navigation = { enable_default_keybindings = true },
+            resize = { enable_default_keybindings = true },
+            swap = { enable_default_keybindings = true },
+        },
     },
 }

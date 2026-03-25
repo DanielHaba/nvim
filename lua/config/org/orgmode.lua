@@ -21,6 +21,7 @@ return {
     org_agenda_start_day = "-1d",
     org_agenda_skip_scheduled_if_done = true,
     org_agenda_skip_deadline_if_done = true,
+    org_todo_keywords = { "TODO", "NEXT", "|", "DONE", "WAITING", "CANCELLED" },
 
     org_priority_highest = "A",
     org_priority_default = "C",

@@ -1,7 +1,7 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 vim.g.colorscheme = "catppuccin"
-vim.g.shell = os.getenv("HOME") .. "/.cargo/bin/nu"
+vim.g.shell = os.getenv("HOME") .. "/.cargo/bin/nu -il"
 -- vim.g.shell = "/usr/sbin/bash"
 
 
@@ -94,7 +94,7 @@ vim.opt.fillchars         = "eob: "                           -- characters to u
 -- vim.opt.findfunc       =                                   -- function to be called for the |:find| command
 -- vim.opt.fixendofline   =                                   -- make sure last line in file has <EOL>
 -- vim.opt.foldclose      =                                   -- close a fold when the cursor leaves it
-vim.opt.foldcolumn        = "1"                               -- width of the column used to indicate folds
+vim.opt.foldcolumn        = "0"                               -- width of the column used to indicate folds (wyłączone)
 vim.opt.foldenable        = true                              -- set to display all folds open
 -- vim.opt.foldexpr       =                                   -- expression used when 'foldmethod' is "expr"
 -- vim.opt.foldignore     =                                   -- ignore lines when 'foldmethod' is "indent"
@@ -223,7 +223,7 @@ vim.opt.ruler             = false                             -- show cursor lin
 vim.opt.scrolloff         = 40                                -- minimum nr. of lines above and below cursor
 -- vim.opt.scrollopt      =                                   -- how 'scrollbind' should behave
 -- vim.opt.sections       =                                   -- nroff macros that separate sections
-vim.opt.secure            = false                             -- secure mode for reading .vimrc in current dir
+vim.opt.secure            = true                              -- secure mode for reading .vimrc in current dir
 -- vim.opt.selection      =                                   -- what type of selection to use
 -- vim.opt.selectmode     =                                   -- when to use Select mode instead of Visual mode
 -- vim.opt.sessionoptions =                                   -- options for |:mksession|

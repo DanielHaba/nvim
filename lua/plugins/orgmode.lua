@@ -6,7 +6,7 @@ return {
         dependencies = {
             { "theme" },
             { "michaelb/sniprun" },
-            { "OXY2DEV/markview.nvim" },
+            -- { "OXY2DEV/markview.nvim" },
         },
         opts = function()
             return require("config.org.orgmode")

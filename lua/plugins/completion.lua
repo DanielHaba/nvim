@@ -8,6 +8,7 @@ return {
             { "onsails/lspkind.nvim" },
             { "xzbdmw/colorful-menu.nvim" },
             { "folke/noice.nvim" },
+            -- { "Kaiser-Yang/blink-cmp-avante" },
         },
         opts = function()
             return require("config.blink")

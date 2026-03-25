@@ -12,8 +12,10 @@ return {
         enable_hybrid_mode = true,
         icon_provider = "mini",
         map_gx = true,
-        filetypes = { "markdown", "quarto", "rmd", "typst", "org" },
-
+        filetypes = { 
+            "markdown", "quarto", "rmd", "typst", "org",
+            "codecompanion", "avante", "AgenticChat",
+        },
     },
     html = { enabled = true },
     latex = { enabled = true },

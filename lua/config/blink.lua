@@ -96,6 +96,10 @@ return {
                 module = "orgmode.org.autocompletion.blink",
                 fallbacks = { "buffer" },
             },
+            -- avante = {
+            --     name = "Avante",
+            --     module = "blink-cmp-avante",
+            -- },
         },
     },
     snippets = {

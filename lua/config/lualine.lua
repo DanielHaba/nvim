@@ -1,4 +1,8 @@
 return {
+    sections = {
+        lualine_z = {
+        },
+    },
     options = {
         theme = vim.g.lualine_theme,
         disabled_filetypes = {
@@ -10,6 +14,13 @@ return {
             "dapui_watches",
             "dapui_console",
             "dap-repl",
+            "Avante",
+            "AvanteSelectedFiles",
+            "AgenticChat",
+            -- "AgenticInput",
+            "AgenticCode",
+            "AgenticFiles",
+            "AgenticDiagnostics"
         },
     },
 }

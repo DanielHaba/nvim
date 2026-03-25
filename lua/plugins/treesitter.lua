@@ -1,8 +1,3 @@
-vim.api.nvim_create_autocmd("BufWinEnter", {
-    pattern = {"*"},
-    command = "normal zR",
-})
-
 local textobjects = function(opts)
     local config = {
         move = {

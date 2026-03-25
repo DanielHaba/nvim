@@ -70,6 +70,21 @@ return {
             "<Leader>u",
             "<Cmd>UndotreeToggle<CR>",
         },
+        {
+            desc = "Show extmarks under cursor",
+            mode = "n",
+            opts = { silent = true },
+            "<Leader>he",
+            function()
+                local line = vim.fn.line('.') - 1
+                local col = vim.fn.col('.') - 1
+                local marks = vim.api.nvim_buf_get_extmarks(0, -1, {line, 0}, {line, -1}, {details=true})
+                print("Extmarks on line " .. (line + 1) .. ":")
+                for _, m in ipairs(marks) do
+                    print(vim.inspect(m))
+                end
+            end,
+        },
         ----------------------------------------- FOCUS WINDOW -------------------------------------------
         {
             desc = "Focus left",
@@ -366,8 +381,8 @@ return {
             mode = "n",
             "<Leader>?",
             function()
-                require("which-key").show({ 
-                    global = true, 
+                require("which-key").show({
+                    global = true,
                     loop = true,
                 })
             end,
@@ -537,4 +552,55 @@ return {
             "<Cmd>OverseerTaskAction<CR>",
         },
     },
+
+    agentic = {
+        {
+            mode = "n",
+            desc = "Agentic",
+            "<Leader>aa",
+            function()
+                require("agentic").open({
+                    auto_add_to_context = true,
+                    focus_prompt = true,
+                })
+            end,
+        },
+        -- {
+        --     mode = "n",
+        --     desc = "Agentic new session",
+        --     "<Leader>aa",
+        --     function ()
+        --         require("agentic").new_session()
+        --     end,
+        -- },
+        {
+            mode = "n",
+            desc = "Agentic restore session",
+            "<Leader>as",
+            function ()
+                require("agentic").restore_session()
+            end,
+        },
+    },
+
+    -- avante = {
+    --     {
+    --         mode = "n",
+    --         desc = "Avante zen",
+    --         "<Leader>aa",
+    --         function ()
+    --             vim.defer_fn(require("avante.api").zen_mode, 100)
+    --         end,
+    --     },
+    --
+    -- },
+
+    -- code_companion = {
+    --     {
+    --         mode = "n",
+    --         desc = "Code companion chat",
+    --         "<Leader>cc",
+    --         "<CMD>CodeCompanionChat<CR>",
+    --     },
+    -- },
 }
